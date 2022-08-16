@@ -22,13 +22,9 @@ app.use(express.static(path.join(__dirname, "public")));
 // Routes
 const indexRouter = require("./routes/index");
 const dashboardRouter = require("./routes/dashboard");
-const editRouter = require("./routes/edit");
-const deleteRouter = require("./routes/delete");
 const daftarRouter = require("./routes/daftar");
 app.use("/", indexRouter);
 app.use("/dashboard", dashboardRouter);
-app.use("/edit", editRouter);
-app.use("/delete", deleteRouter);
 app.use("/daftar", daftarRouter);
 
 module.exports = app;

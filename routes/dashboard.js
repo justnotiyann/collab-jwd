@@ -2,8 +2,11 @@ const router = require("express").Router();
 const Product = require("../models/Products");
 const Users = require("../models/Users");
 const { Op } = require("sequelize");
+const argon2 = require("argon2");
 
-// Get Landing Page
+// Product Handling
+
+// Get Landing Page Dashboard
 router.get("/", async (req, res) => {
   res.json({ msg: "Hello vro" });
 });
@@ -23,6 +26,26 @@ router.get("/product/:id", async (req, res) => {
   res.json(result);
 });
 
+// EDIT Handling For Product Table
+router.post("/product/edit/:id", async (req, res) => {
+  const id = req.params.id;
+  const { judul_buku, penulis, kategori, penerbit, harga } = req.body;
+  const result = Product.update(
+    {
+      judul_buku: judul_buku,
+      penulis: penulis,
+      kategori: kategori,
+      penerbit: penerbit,
+      harga: harga,
+    },
+    {
+      where: { id: id },
+    }
+  );
+  if (!result) return res.json({ msg: "Data tidak ditemukan" });
+  res.json("Oke berhasil di update");
+});
+
 // DELETE Handling For Product Table
 router.get("/product/delete/:id", async (req, res) => {
   const id = req.params.id;
@@ -31,11 +54,40 @@ router.get("/product/delete/:id", async (req, res) => {
   res.json({ msg: "Data berhasil dihapus" });
 });
 
-// GET Data From USERS Table
+// Users Handling
+
+// GET * Data From USERS Table
 router.get("/users", async (req, res) => {
   const result = await Users.findAll({});
-  if (!result) return res.json({ msg: "Data tidak ditemukan" });
+  if (!result.length > 0) return res.json({ msg: "Data tidak ditemukan" });
   res.json({ result });
+});
+
+// Get USERS by ID / name / email
+router.get("/users/:id", async (req, res) => {
+  const id = req.params.id;
+  const result = await Users.findAll({ where: { [Op.or]: [{ id: id }, { nama: id }, { email: id }, { jenis_kelamin: id }] } });
+  if (!result.length > 0) return res.json({ msg: "Data tidak ditemukan" });
+  res.json({ result });
+});
+
+// EDIT handling for USERS Table
+router.post("/users/edit/:id", async (req, res) => {
+  const id = req.params.id;
+  const { nama, email, password } = req.body;
+  const hash = await argon2.hash(password);
+  const result = await Users.update(
+    {
+      nama: nama,
+      email: email,
+      password: hash,
+    },
+    {
+      where: { id: id },
+    }
+  );
+  if (!result.length > 0) return res.json("Data tidak ditemukan");
+  res.json({ msg: "Data berhasil diupdate" });
 });
 
 module.exports = router;
