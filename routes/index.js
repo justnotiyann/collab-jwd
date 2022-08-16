@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
       res.json({ msg: "Berhasil login" });
     }
   } catch (error) {
-    res.sendStatus(400).json({ msg: error.message });
+    res.json({ msg: error.message });
   }
 });
 
@@ -28,7 +28,7 @@ router.post("/add", async (req, res) => {
     if (!result) return res.sendStatus(403).json({ msg: "Gagal Membuat Data" });
     res.sendStatus(200).json({ msg: "Berhasil Membuat Data" });
   } catch (error) {
-    res.sendStatus(400).json({ msg: error.message });
+    res.json({ msg: error.message });
   }
 });
 

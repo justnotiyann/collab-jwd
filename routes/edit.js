@@ -17,9 +17,8 @@ router.post("/:id", async (req, res) => {
       where: { id: id },
     }
   );
-  if (!result) return res.sendStatus(500).json({ msg: "Terjadi Kesalahan" });
+  if (!result) return res.json({ msg: "Data tidak ditemukan" });
   res.json("Oke berhasil di update");
-  //   res.sendStatus(200).json({ msg: "Oke berhasil diupdate" });
 });
 
 module.exports = router;
