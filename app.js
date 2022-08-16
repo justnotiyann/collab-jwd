@@ -1,11 +1,10 @@
-var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var ejsLayout = require("express-ejs-layouts");
-
 var app = express();
+
 app.listen(3000, () => {
   console.log("server berjalan");
 });
