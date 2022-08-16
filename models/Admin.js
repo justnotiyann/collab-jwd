@@ -20,9 +20,9 @@ const admin = db.define(
 
 try {
   admin.sync({});
-  console.log("table database baru saja dibuat");
+  // console.log("table database baru saja dibuat");
 } catch (error) {
-  console.log(error);
+  // console.log(error);
 }
 
 module.exports = admin;

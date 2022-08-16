@@ -1,9 +1,9 @@
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var ejsLayout = require("express-ejs-layouts");
-var app = express();
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const ejsLayout = require("express-ejs-layouts");
+const app = express();
 
 app.listen(3000, () => {
   console.log("server berjalan");
@@ -20,9 +20,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
-var indexRouter = require("./routes/index");
-const data = require("./routes/data");
+const indexRouter = require("./routes/index");
+const dashboardRouter = require("./routes/dashboard");
+const editRouter = require("./routes/edit");
 app.use("/", indexRouter);
-app.use("/data", data);
+app.use("/dashboard", dashboardRouter);
+app.use("/edit", editRouter);
 
 module.exports = app;

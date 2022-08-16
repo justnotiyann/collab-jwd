@@ -29,9 +29,9 @@ const users = db.define(
 
 try {
   users.sync({});
-  console.log("table database baru saja dibuat");
+  // console.log("table database baru saja dibuat");
 } catch (error) {
-  console.log(error);
+  // console.log(error);
 }
 
 module.exports = users;

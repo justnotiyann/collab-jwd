@@ -23,15 +23,15 @@ const products = db.define(
   },
   {
     freezeTableName: true,
-    timestamp: false,
+    timestamps: false,
   }
 );
 
 try {
   products.sync({});
-  console.log("table database baru saja dibuat");
+  // console.log("table database baru saja dibuat");
 } catch (error) {
-  console.log(error);
+  // console.log(error);
 }
 
 module.exports = products;
