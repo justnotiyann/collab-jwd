@@ -21,10 +21,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
 var indexRouter = require("./routes/index");
-const loginRouter = require("./routes/login");
-const daftarRouter = require("./routes/daftar");
+const data = require("./routes/data");
 app.use("/", indexRouter);
-app.use("/login", loginRouter);
-app.use("/daftar", daftarRouter);
+app.use("/data", data);
 
 module.exports = app;

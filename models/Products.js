@@ -1,23 +1,23 @@
 const db = require("../config/db");
 const DataTypes = require("sequelize");
 
-const users = db.define(
-  "users",
+const products = db.define(
+  "products",
   {
-    nama: {
+    judul_buku: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    email: {
+    penulis: {
       type: DataTypes.STRING,
     },
-    password: {
+    kategori: {
       type: DataTypes.STRING,
     },
-    jenis_kelamin: {
+    penerbit: {
       type: DataTypes.STRING,
     },
-    alamat: {
+    harga: {
       type: DataTypes.STRING,
     },
   },
@@ -28,10 +28,10 @@ const users = db.define(
 );
 
 try {
-  users.sync({});
+  products.sync({});
   console.log("table database baru saja dibuat");
 } catch (error) {
   console.log(error);
 }
 
-module.exports = users;
+module.exports = products;

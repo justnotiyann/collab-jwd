@@ -1,33 +1,34 @@
-var express = require("express");
-var router = express.Router();
-const books = require("../models/Books");
+const router = require("express").Router();
+const argon2 = require("argon2");
+const Admin = require("../models/Admin");
 
-/* GET home page. */
-router.get("/", async (req, res) => {
+// Login admin
+router.post("/", async (req, res) => {
   try {
-    const result = await books.findAll({});
-    if (!result) return res.json("Terdapat error");
-    res.json(result);
+    const { email, password } = req.body;
+    const result = await Admin.findOne({ where: { email: email } });
+    if (!result) {
+      res.json({ msg: "data tidak ditemukan" });
+    } else {
+      const hash = await argon2.verify(result.password, password);
+      if (!hash) return res.json({ msg: "Password anda salah" });
+      res.json({ msg: "Berhasil login" });
+    }
   } catch (error) {
-    res.json({
-      msg: `terdapat error ${error}`,
-    });
+    res.sendStatus(400).json({ msg: error.message });
   }
 });
 
+// daftar admin
 router.post("/add", async (req, res) => {
   try {
-    const { book_title, author } = req.body;
-    const result = await books.create({
-      book_title: book_title,
-      author: author,
-    });
-    if (!result) return res.json("Terdapat error");
-    res.json("Data berhasil ditambahkan !");
+    const { email, password } = req.body;
+    const hash = await argon2.hash(password);
+    const result = await Admin.create({ email: email, password: hash });
+    if (!result) return res.sendStatus(403).json({ msg: "Gagal Membuat Data" });
+    res.sendStatus(200).json({ msg: "Berhasil Membuat Data" });
   } catch (error) {
-    res.json({
-      msg: `terdapat error ${error}`,
-    });
+    res.sendStatus(400).json({ msg: error.message });
   }
 });
 

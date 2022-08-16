@@ -1,29 +1,28 @@
 const db = require("../config/db");
 const DataTypes = require("sequelize");
 
-const books = db.define(
-  "books",
+const admin = db.define(
+  "admin",
   {
-    // Model attributes are defined here
-    book_title: {
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    author: {
+    password: {
       type: DataTypes.STRING,
-      // allowNull defaults to true
     },
   },
   {
     freezeTableName: true,
+    timestamp: false,
   }
 );
 
 try {
-  books.sync({});
+  admin.sync({});
   console.log("table database baru saja dibuat");
 } catch (error) {
   console.log(error);
 }
 
-module.exports = books;
+module.exports = admin;
