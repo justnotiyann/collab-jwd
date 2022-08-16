@@ -12,14 +12,14 @@ router.get("/", async (req, res) => {
 });
 
 // GET Product
-router.get("/product", async (req, res) => {
+router.get("/products", async (req, res) => {
   const result = await Product.findAll({});
   if (!result) return res.json({ msg: "Terjadi kesalahan" });
   res.json(result);
 });
 
 // GET Product by judul_buku
-router.get("/product/:id", async (req, res) => {
+router.get("/products/:id", async (req, res) => {
   const id = req.params.id;
   const result = await Product.findAll({ where: { [Op.or]: [{ id: id }, { judul_buku: id }, { penulis: id }, { kategori: id }, { penerbit: id }] } });
   if (!result) return res.json({ msg: "Terjadi kesalahan" });
@@ -27,7 +27,7 @@ router.get("/product/:id", async (req, res) => {
 });
 
 // EDIT Handling For Product Table
-router.post("/product/edit/:id", async (req, res) => {
+router.post("/products/edit/:id", async (req, res) => {
   const id = req.params.id;
   const { judul_buku, penulis, kategori, penerbit, harga } = req.body;
   const result = Product.update(
@@ -47,7 +47,7 @@ router.post("/product/edit/:id", async (req, res) => {
 });
 
 // DELETE Handling For Product Table
-router.get("/product/delete/:id", async (req, res) => {
+router.get("/products/delete/:id", async (req, res) => {
   const id = req.params.id;
   const result = await Product.destroy({ where: { id: id } });
   if (!result) return res.json({ msg: "Data tidak ditemukan" });
