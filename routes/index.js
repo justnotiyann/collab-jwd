@@ -2,6 +2,14 @@ const router = require("express").Router();
 const argon2 = require("argon2");
 const Admin = require("../models/Admin");
 
+// GET Landing Login Page
+router.get("/", async (req, res) => {
+  res.render("index", {
+    layout: "./layout/main",
+    title: "Halaman Login",
+  });
+});
+
 // Login admin
 router.post("/", async (req, res) => {
   try {
@@ -12,7 +20,11 @@ router.post("/", async (req, res) => {
     } else {
       const hash = await argon2.verify(result.password, password);
       if (!hash) return res.json({ msg: "Password anda salah" });
-      res.json({ msg: "Berhasil login" });
+      res.render("dashboard", {
+        layout: "./layout/main",
+        title: "Halaman Dashboard",
+      });
+      // res.json({ msg: "Berhasil login" });
     }
   } catch (error) {
     res.json({ msg: error.message });
