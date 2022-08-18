@@ -15,6 +15,14 @@ router.get("/", async (req, res) => {
   }
 });
 
+// GET form add products
+router.get("/add", (req, res) => {
+  res.render("tambah-components/Products", {
+    layout: "./layout/main",
+    title: "Form Tambah Products",
+  });
+});
+
 // GET Product by Search
 router.get("/products/:id", async (req, res) => {
   const id = req.params.id;
@@ -60,6 +68,7 @@ router.post("/edit", async (req, res) => {
       layout: "./layout/main",
       title: "Berhasil Di Update",
       desc: "Data berhasil diupdate",
+      link: "products",
     });
   }
 });
@@ -75,6 +84,7 @@ router.get("/delete/:id", async (req, res) => {
       layout: "./layout/main",
       title: "Data Berhasil Dihapus",
       desc: "Sukses Menghapus Data",
+      link: "products",
     });
     // res.json({ msg: "Data berhasil dihapus" });
   }

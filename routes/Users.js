@@ -33,7 +33,12 @@ router.get("/add", async (req, res) => {
 router.post("/add", async (req, res) => {
   const { nama, email, nomor_telepon, password, confirm, jenis_kelamin, alamat } = req.body;
   if (password != confirm) {
-    res.json({ msg: "Password tidak cocok harap cek kembali" });
+    res.render("components/confirm", {
+      layout: "./layout/main",
+      title: "Gagal Input Data",
+      desc: "Password tidak cocok harap masukkan ulang",
+      link: "users",
+    });
   } else {
     const hash = await argon2.hash(password);
     const result = await Users.create({
@@ -50,7 +55,8 @@ router.post("/add", async (req, res) => {
       res.render("components/confirm", {
         layout: "./layout/main",
         title: "Berhasil Menambahkan User",
-        desc: "Berhasil menambahkan user",
+        desc: `Berhasil menambahkan user ${nama}`,
+        link: "users",
       });
     }
   }
@@ -67,6 +73,7 @@ router.get("/delete/:id", async (req, res) => {
       layout: "./layout/main",
       title: "Data berhasil dihapus",
       desc: `Data Users ${id} Berhasil dihapus`,
+      link: "users",
     });
   }
 });

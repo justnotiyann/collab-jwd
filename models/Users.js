@@ -30,7 +30,7 @@ const users = db.define(
 );
 
 try {
-  users.sync({ force: true });
+  users.sync({});
   // console.log("table database baru saja dibuat");
 } catch (error) {
   // console.log(error);
