@@ -1,0 +1,45 @@
+<div class="container section-margin">
+  <div class="row">
+    <div class="col-6">
+      <h5 class="fw-bold">Halaman Panel Admin</h5>
+      <p>Cari data terkait</p>
+      <form action="">
+        <input type="text" class="form-control" />
+      </form>
+    </div>
+  </div>
+
+  <table class="table mt-3">
+    <thead class="table-success">
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Judul Buku</th>
+        <th scope="col">Penulis</th>
+        <th scope="col">Kategori</th>
+        <th scope="col">Penerbit</th>
+        <th scope="col">Harga</th>
+        <th scope="col">Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% i=1 %> <% result.forEach((datas) => { %>
+      <tr>
+        <td><%= i++ %></td>
+        <td><%= datas.judul_buku %></td>
+        <td><%= datas.penulis %></td>
+        <td><%= datas.kategori %></td>
+        <td><%= datas.penerbit %></td>
+        <td><%= datas.harga %></td>
+        <td>
+          <a href="">
+            <button class="btn btn-danger badge">Hapus Data</button>
+          </a>
+          <a href="">
+            <button class="btn btn-warning badge">Edit Data</button>
+          </a>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

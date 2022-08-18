@@ -11,6 +11,20 @@ router.get("/", async (req, res) => {
   res.json({ msg: "Hello vro" });
 });
 
+// GET Product
+router.get("/products", async (req, res) => {
+  const result = await Product.findAll({});
+  if (!result) {
+    res.json({ msg: "Terjadi kesalahan" });
+  } else {
+    res.render("dashboard-products", {
+      layout: "./layout/main",
+      title: "Halaman Data Product",
+      result,
+    });
+  }
+});
+
 // GET Product by judul_buku
 router.get("/products/:id", async (req, res) => {
   const id = req.params.id;
@@ -52,8 +66,15 @@ router.get("/products/delete/:id", async (req, res) => {
 // GET * Data From USERS Table
 router.get("/users", async (req, res) => {
   const result = await Users.findAll({});
-  if (result.length < 0) return res.json({ msg: "Data tidak ditemukan" });
-  res.json({ result });
+  if (result.length < 0) {
+    res.json({ msg: "Data tidak ditemukan" });
+  } else {
+    res.render("dashboard-users", {
+      layout: "./layout/main",
+      title: "Halaman Data Users",
+      result,
+    });
+  }
 });
 
 // Get USERS by ID / name / email

@@ -22,11 +22,14 @@ app.use(express.static(path.join(__dirname, "public")));
 // Routes
 const indexRouter = require("./routes/index");
 const dashboardRouter = require("./routes/dashboard");
+const aboutRouter = require("./routes/about");
 const daftarRouter = require("./routes/daftar");
 const loginRouter = require("./routes/login");
+
 app.use("/", indexRouter);
 app.use("/login", loginRouter);
 app.use("/dashboard", dashboardRouter);
+app.use("/about", aboutRouter);
 app.use("/daftar", daftarRouter);
 
 module.exports = app;
