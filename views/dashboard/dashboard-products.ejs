@@ -1,11 +1,17 @@
 <div class="container p-3" style="margin-top: 2em">
-  <div class="row">
+  <div class="row d-flex justify-content-evenly align-items-center mb-5">
     <div class="col-6">
       <h5 class="fw-bold">Halaman Panel Admin</h5>
       <p>Cari data terkait</p>
       <form action="">
         <input type="text" class="form-control" />
       </form>
+    </div>
+    <div class="col-6 text-end">
+      <h4>Tambah Data Products</h4>
+      <p>
+        Link Disini <span><a href="/tambah-product" class="text-primary">Tambah Product</a></span>
+      </p>
     </div>
   </div>
 
@@ -31,11 +37,11 @@
         <td><%= datas.penerbit %></td>
         <td><%= datas.harga %></td>
         <td>
-          <a href="">
+          <a href="/products/delete/<%= datas.id %> " onclick="return confirm('Anda yakin?')">
             <button class="btn btn-danger badge">Hapus Data</button>
           </a>
           <br />
-          <a href="">
+          <a href="/products/edit/<%= datas.id %> ">
             <button class="btn btn-warning badge">Edit Data</button>
           </a>
         </td>

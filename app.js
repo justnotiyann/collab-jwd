@@ -25,11 +25,17 @@ const dashboardRouter = require("./routes/dashboard");
 const aboutRouter = require("./routes/about");
 const daftarRouter = require("./routes/daftar");
 const loginRouter = require("./routes/login");
+const productsRouter = require("./routes/Products");
+const usersRouter = require("./routes/Users");
+const transaksiRouter = require("./routes/Transaksi");
 
 app.use("/", indexRouter);
 app.use("/login", loginRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/about", aboutRouter);
 app.use("/daftar", daftarRouter);
+app.use("/products", productsRouter);
+app.use("/users", usersRouter);
+app.use("/transaksi", transaksiRouter);
 
 module.exports = app;
