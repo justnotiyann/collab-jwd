@@ -5,24 +5,60 @@
       <p class="text-muted">Harap pastikan input user dengan benar</p>
     </div>
   </div>
-  <form action="/products/edit" method="post">
-    <input type="hidden" class="form-control" name="id" value="<%= result.id %>" id="id" placeholder="Masukkan ID" />
-    <div class="mb-3">
-      <label for="nama" class="form-label fw-bold">Nama Baru Users</label>
-      <input type="text" class="form-control" name="nama" id="nama" placeholder="Masukkan Nama Baru..." />
+  <form action="/users/edit" method="post">
+    <input type="hidden" class="form-control" name="id" value="<%= result.id %>" id="id" required placeholder="Masukkan ID" />
+    <div class="row">
+      <div class="col">
+        <div class="mb-3">
+          <label for="nama" class="form-label fw-bold">Nama Baru Users</label>
+          <input type="text" class="form-control" name="nama" id="nama" required placeholder="Masukkan Nama Baru..." />
+        </div>
+      </div>
+      <div class="col">
+        <div class="mb-3">
+          <label for="email" class="form-label fw-bold">Email users</label>
+          <input type="text" class="form-control" name="email" id="email" required placeholder="Masukkan email baru..." />
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="email" class="form-label fw-bold">Email users</label>
-      <input type="text" class="form-control" name="email" id="email" placeholder="Masukkan email baru..." />
-    </div>
+
     <div class="mb-3">
       <label for="password" class="form-label fw-bold">Password Baru</label>
-      <input type="text" class="form-control" name="password" id="password" placeholder="Masukkan password baru..." />
+      <input type="password" class="form-control" name="password" id="password" required placeholder="Masukkan password baru..." />
     </div>
     <div class="mb-3">
       <label for="confirm" class="form-label fw-bold">Konfirmasi Ulang Password</label>
-      <input type="text" class="form-control" name="confirm" id="confirm" placeholder="Masukkan confirm baru..." />
+      <input type="password" class="form-control" name="confirm" id="confirm" required placeholder="Masukkan confirm baru..." />
     </div>
-    <button class="btn btn-success">Update Data</button>
+    <div class="mb-3">
+      <label for="email" class="form-label fw-bold">Jenis Kelamin Users</label>
+      <input type="text" class="form-control" name="email" id="email" required placeholder="Masukkan email baru..." />
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label fw-bold">No Telepon Users</label>
+      <input type="text" class="form-control" name="" id="" required placeholder="Masukkan  baru..." />
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label fw-bold">Alamat Users</label>
+      <input type="text" class="form-control" name="email" id="email" required placeholder="Masukkan email baru..." />
+    </div>
+
+    <input type="reset" value="Reset Button" class="btn btn-danger" />
+    <button class="btn btn-success" id="editButton">Update Data</button>
   </form>
 </div>
+
+<script>
+  const password = document.querySelector("#password");
+  const confirm = document.querySelector("#confirm");
+  const getButton = document.querySelector("#editButton");
+
+  getButton.addEventListener("click", () => {
+    if (password.value != confirm.value) {
+      alert("Password tidak sama, Silahka cek kembali");
+    } else {
+      alert("Ok berhasil diupdate");
+    }
+  });
+</script>

@@ -11,6 +11,9 @@ const users = db.define(
     email: {
       type: DataTypes.STRING,
     },
+    nomor_telepon: {
+      type: DataTypes.STRING,
+    },
     password: {
       type: DataTypes.STRING,
     },
@@ -27,7 +30,7 @@ const users = db.define(
 );
 
 try {
-  users.sync({});
+  users.sync({ force: true });
   // console.log("table database baru saja dibuat");
 } catch (error) {
   // console.log(error);
