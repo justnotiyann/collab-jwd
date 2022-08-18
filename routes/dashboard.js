@@ -11,13 +11,6 @@ router.get("/", async (req, res) => {
   res.json({ msg: "Hello vro" });
 });
 
-// GET Product
-router.get("/products", async (req, res) => {
-  const result = await Product.findAll({});
-  if (!result) return res.json({ msg: "Terjadi kesalahan" });
-  res.json(result);
-});
-
 // GET Product by judul_buku
 router.get("/products/:id", async (req, res) => {
   const id = req.params.id;

@@ -23,7 +23,9 @@ app.use(express.static(path.join(__dirname, "public")));
 const indexRouter = require("./routes/index");
 const dashboardRouter = require("./routes/dashboard");
 const daftarRouter = require("./routes/daftar");
+const loginRouter = require("./routes/login");
 app.use("/", indexRouter);
+app.use("/login", loginRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/daftar", daftarRouter);
 

@@ -1,19 +1,43 @@
-<div class="container p-5" style="margin-top: 10em">
+<div class="container section-margin">
   <div class="row">
-    <div class="col-12">
-      <form action="/" method="post">
-        <div class="col-6">
-          <div class="mb-3">
-            <label for="" class="form-label">Masukkan email</label>
-            <input type="email" class="form-control" name="email" id="email" placeholder="Masukkan email" />
-          </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">Masukkan Password </label>
-            <input type="password" class="form-control" name="password" id="password" placeholder="Masukkan password" />
-          </div>
-        </div>
-        <button class="btn btn-success">Login</button>
+    <div class="col-6">
+      <h5 class="fw-bold">Halaman Panel Admin</h5>
+      <p>Cari data terkait</p>
+      <form action="">
+        <input type="text" class="form-control" />
       </form>
     </div>
   </div>
+
+  <table class="table mt-3">
+    <thead class="table-success">
+      <tr>
+        <th scope="col">Judul Buku</th>
+        <th scope="col">Penulis</th>
+        <th scope="col">Kategori</th>
+        <th scope="col">Penerbit</th>
+        <th scope="col">Harga</th>
+        <th scope="col">Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% result.forEach((datas) => { %>
+      <tr>
+        <td><%= datas.judul_buku %></td>
+        <td><%= datas.penulis %></td>
+        <td><%= datas.kategori %></td>
+        <td><%= datas.penerbit %></td>
+        <td><%= datas.harga %></td>
+        <td>
+          <a href="">
+            <button class="btn btn-danger badge">Hapus Data</button>
+          </a>
+          <a href="">
+            <button class="btn btn-warning badge">Edit Data</button>
+          </a>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
 </div>
