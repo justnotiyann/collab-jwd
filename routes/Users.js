@@ -1,9 +1,14 @@
 const router = require("express").Router();
 const Users = require("../models/Users");
 
-// GET * Data From USERS Table
+// GET ALL DATAS and Lading Page
 router.get("/", async (req, res) => {
-  const result = await Users.findAll({});
+  const result = await Users.findAll({
+    order: [
+      ["createdAt", "DESC"],
+      ["updatedAt", "DESC"],
+    ],
+  });
   if (result.length < 0) {
     res.json({ msg: "Data tidak ditemukan" });
   } else {
@@ -15,18 +20,39 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Get USERS by ID / name / email
-router.get("/users/:id", async (req, res) => {
+// DELETE Handling for USERS table
+router.get("/delete/:id", async (req, res) => {
   const id = req.params.id;
-  const result = await Users.findAll({ where: { [Op.or]: [{ id: id }, { nama: id }, { email: id }, { jenis_kelamin: id }] } });
-  if (result.length < 0) return res.json({ msg: "Data tidak ditemukan" });
-  res.json({ result });
+  const result = await Users.destroy({ where: { nama: id } });
+  if (result.length < 0) {
+    res.json({ msg: "Data tidak ditemukan" });
+  } else {
+    res.render("components/confirm", {
+      layout: "./layout/main",
+      title: "Data berhasil dihapus",
+      desc: `Data Users ${id} Berhasil dihapus`,
+    });
+  }
+});
+
+router.get("/edit/:id", async (req, res) => {
+  const id = req.params.id;
+  const result = await Users.findOne({ where: { id: id } });
+  if (!result) {
+    res.json("Terjadi Kesalahan");
+  } else {
+    res.render("edit-components/Users", {
+      layout: "./layout/main",
+      title: "Halaman Edit Users",
+      result,
+    });
+  }
 });
 
 // EDIT handling for USERS Table
 router.post("/users/edit/:id", async (req, res) => {
   const id = req.params.id;
-  const { nama, email, password } = req.body;
+  const { nama, email, password, confirm } = req.body;
   const hash = await argon2.hash(password);
   const result = await Users.update(
     {
@@ -42,12 +68,12 @@ router.post("/users/edit/:id", async (req, res) => {
   res.json({ msg: "Data berhasil diupdate" });
 });
 
-// DELETE Handling for USERS table
-router.get("/users/delete/:id", async (req, res) => {
-  const id = req.params.id;
-  const result = await Users.destroy({ where: { id: id } });
-  if (result.length < 0) return res.json({ msg: "Data tidak ditemukan" });
-  res.json({ msg: "Data berhasil dihapus" });
-});
+// Get USERS by ID / name / email
+// router.get("/users/:id", async (req, res) => {
+//   const id = req.params.id;
+//   const result = await Users.findAll({ where: { [Op.or]: [{ id: id }, { nama: id }, { email: id }, { jenis_kelamin: id }] } });
+//   if (result.length < 0) return res.json({ msg: "Data tidak ditemukan" });
+//   res.json({ result });
+// });
 
 module.exports = router;

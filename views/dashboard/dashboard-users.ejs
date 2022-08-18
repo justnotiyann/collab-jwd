@@ -1,11 +1,17 @@
-<div class="container p-3" style="margin-top: 2em">
-  <div class="row">
+<div class="container" style="margin-top: 2em">
+  <div class="row mb-5">
     <div class="col-6">
       <h5 class="fw-bold">Halaman Panel Admin</h5>
       <p>Cari data terkait</p>
       <form action="">
         <input type="text" class="form-control" />
       </form>
+    </div>
+    <div class="col-6 text-end">
+      <h4>Tambah Data Users</h4>
+      <p>
+        Link <span><a href="/tambah-product" class="text-primary">Tambah Users</a></span>
+      </p>
     </div>
   </div>
 
@@ -31,11 +37,11 @@
         <td><%= datas.jenis_kelamin %></td>
         <td><%= datas.alamat %></td>
         <td>
-          <a href="">
+          <a href="/users/delete/<%= datas.nama %>" onclick="return confirm('Anda Yakin ?')">
             <button class="btn btn-danger badge">Hapus Data</button>
           </a>
           <br />
-          <a href="">
+          <a href="/users/edit/<%= datas.id %>">
             <button class="btn btn-warning badge">Edit Data</button>
           </a>
         </td>
