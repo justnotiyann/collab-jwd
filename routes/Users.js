@@ -2,7 +2,7 @@ const router = require("express").Router();
 const Users = require("../models/Users");
 const argon2 = require("argon2");
 
-// GET ALL DATAS and Lading Page
+// Render all data from database
 router.get("/", async (req, res) => {
   const result = await Users.findAll({
     order: [
@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// GET User ADD FORM
+// Render form ADD / TAMBAH
 router.get("/add", async (req, res) => {
   res.render("tambah-components/Users", {
     layout: "./layout/main",
@@ -29,7 +29,7 @@ router.get("/add", async (req, res) => {
   });
 });
 
-// HANDLING USERS ADD FORM
+// Handling ADD / TAMBAH user
 router.post("/add", async (req, res) => {
   const { nama, email, nomor_telepon, password, confirm, jenis_kelamin, alamat } = req.body;
   if (password != confirm) {
@@ -78,22 +78,22 @@ router.get("/delete/:id", async (req, res) => {
   }
 });
 
-// get edit page
+// Render form EDIT Users
 router.get("/edit/:id", async (req, res) => {
-  // const id = req.params.id;
-  // const result = await Users.findOne({ where: { id: id } });
-  // if (!result) {
-  //   res.json("Terjadi Kesalahan");
-  // } else {
-  // res.render("edit-components/Users", {
-  //   layout: "./layout/main",
-  //   title: "Halaman Edit Users",
-  //     result,
-  //   });
-  // }
+  const id = req.params.id;
+  const result = await Users.findOne({ where: { id: id } });
+  if (!result) {
+    res.json("Terjadi Kesalahan");
+  } else {
+    res.render("edit-components/Users", {
+      layout: "./layout/main",
+      title: "Halaman Edit Users",
+      result,
+    });
+  }
 });
 
-// EDIT handling for USERS Table
+// Handling form EDIT Users
 router.post("/edit", async (req, res) => {
   const { id, nama, email, password, confirm } = req.body;
   if (password != confirm) {
@@ -117,6 +117,7 @@ router.post("/edit", async (req, res) => {
         layout: "./layout/main",
         title: "Berhasil edit user",
         desc: "Berhasil edit user",
+        link: "users",
       });
     }
   }
