@@ -23,15 +23,33 @@ router.get("/add", (req, res) => {
   });
 });
 
-// GET Product by Search
-router.get("/products/:id", async (req, res) => {
-  const id = req.params.id;
-  const result = await Product.findAll({ where: { [Op.or]: [{ id: id }, { judul_buku: id }, { penulis: id }, { kategori: id }, { penerbit: id }] } });
-  if (!result) return res.json({ msg: "Terjadi kesalahan" });
-  res.json(result);
+router.post("/add", async (req, res) => {
+  const { judul_buku, penulis, kategori, penerbit, harga } = req.body;
+  const result = await Product.create({
+    judul_buku: judul_buku,
+    penulis: penulis,
+    kategori: kategori,
+    penerbit: penerbit,
+    harga: harga,
+  });
+  if (!result) {
+    res.render("components/confirm", {
+      layout: "./layout/main",
+      title: "Gagal input data",
+      desc: "Gagal input data",
+      link: "products/add",
+    });
+  } else {
+    res.render("components/confirm", {
+      layout: "./layout/main",
+      title: "Berhasil input data",
+      desc: "Berhasil input data",
+      link: "products",
+    });
+  }
 });
 
-// EDIT Handling For Product Table
+// GET EDIT Form Handling For Product Table
 router.get("/edit/:id", async (req, res) => {
   const id = req.params.id;
   const result = await Product.findOne({ where: { id: id } });
@@ -89,5 +107,13 @@ router.get("/delete/:id", async (req, res) => {
     // res.json({ msg: "Data berhasil dihapus" });
   }
 });
+
+// // GET Product by Search
+// router.get("/products/:id", async (req, res) => {
+//   const id = req.params.id;
+//   const result = await Product.findAll({ where: { [Op.or]: [{ id: id }, { judul_buku: id }, { penulis: id }, { kategori: id }, { penerbit: id }] } });
+//   if (!result) return res.json({ msg: "Terjadi kesalahan" });
+//   res.json(result);
+// });
 
 module.exports = router;
