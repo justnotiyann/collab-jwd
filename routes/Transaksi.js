@@ -3,7 +3,7 @@ const Transaksi = require("../models/Transaksi");
 
 // Render all data from database / READ
 router.get("/", async (req, res) => {
-  const result = await Transaksi.findAll({});
+  const result = await Transaksi.findAll({ order: [["createdAt", "DESC"]] });
   res.render("dashboard/dashboard-transaksi", {
     layout: "./layout/main",
     title: "Halaman Transaksi Users",
@@ -11,10 +11,100 @@ router.get("/", async (req, res) => {
   });
 });
 
+// Render ADD FORM Transaksi
+router.get("/add", async (req, res) => {
+  res.render("tambah-components/Transaksi", {
+    layout: "./layout/main",
+    title: "Halaman tambah data",
+  });
+});
+
+// Handling ADD
+router.post("/add", async (req, res) => {
+  const { nama, email, nomor_telepon, alamat, judul_buku, harga, sistem_pembayaran } = req.body;
+  const result = await Transaksi.create({
+    nama: nama,
+    email: email,
+    nomor_telepon: nomor_telepon,
+    alamat: alamat,
+    judul_buku: judul_buku,
+    harga: harga,
+    sistem_pembayaran: sistem_pembayaran,
+  });
+  if (!result) {
+    res.render("components/confirm", {
+      layout: "./layout/main",
+      title: "Gagal input data",
+      desc: "Gagal input data",
+      link: "transaksi/add",
+    });
+  } else {
+    res.render("components/confirm", {
+      layout: "./layout/main",
+      title: "Berhasil input data",
+      desc: "Berhasil input data",
+      link: "transaksi",
+    });
+  }
+});
+
+// Render EDIT form
+router.get("/edit/:id", async (req, res) => {
+  const id = req.params.id;
+  const result = await Transaksi.findOne({ where: { id: id } });
+  if (!result) {
+    res.render("components/confirm", {
+      layout: "./layout/main",
+      title: "Gagal mendapatkan data",
+      desc: "Gagal mendapatkan data",
+      link: "transaksi",
+    });
+  } else {
+    res.render("edit-components/Transaksi", {
+      layout: "./layout/main",
+      title: "Halaman Edit",
+      result,
+    });
+  }
+});
+
+router.post("/edit", async (req, res) => {
+  const { id, nama, email, nomor_telepon, alamat, judul_buku, harga, sistem_pembayaran } = req.body;
+  const result = await Transaksi.update(
+    {
+      nama: nama,
+      email: email,
+      nomor_telepon: nomor_telepon,
+      alamat: alamat,
+      judul_buku: judul_buku,
+      harga: harga,
+      sistem_pembayaran: sistem_pembayaran,
+    },
+    {
+      where: { id: id },
+    }
+  );
+  if (!result) {
+    res.render("components/confirm", {
+      layout: "./layout/main",
+      title: "Gagal edit data",
+      desc: "Gagal edit data",
+      link: "transaksi/edit",
+    });
+  } else {
+    res.render("components/confirm", {
+      layout: "./layout/main",
+      title: "Berhasil mendapatkan data",
+      desc: `Berhasil edit data `,
+      link: "transaksi",
+    });
+  }
+});
+
 // Handling DELETE data
 router.get("/delete/:id", async (req, res) => {
   const id = req.params.id;
-  const result = await Transaksi.destroy({ where: { id: id } });
+  const result = await Transaksi.destroy({ where: { nama: id } });
   if (!result) {
     res.render("components/confirm", {
       layout: "./layout/main",

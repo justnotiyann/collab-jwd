@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { Op } = require("sequelize");
 const Product = require("../models/Products");
 
 // GET Landing Page and Product
@@ -108,12 +109,24 @@ router.get("/delete/:id", async (req, res) => {
   }
 });
 
-// // GET Product by Search
-// router.get("/products/:id", async (req, res) => {
-//   const id = req.params.id;
-//   const result = await Product.findAll({ where: { [Op.or]: [{ id: id }, { judul_buku: id }, { penulis: id }, { kategori: id }, { penerbit: id }] } });
-//   if (!result) return res.json({ msg: "Terjadi kesalahan" });
-//   res.json(result);
-// });
+// Handling SEARCH
+router.post("/search", async (req, res) => {
+  const { search } = req.body;
+  const result = await Product.findAll({
+    where: {
+      [Op.or]: [{ judul_buku: { [Op.like]: `%${search}%` } }, { penulis: { [Op.like]: `%${search}%` } }, { kategori: { [Op.like]: `%${search}%` } }, { penerbit: { [Op.like]: `%${search}%` } }, { harga: { [Op.like]: `%${search}%` } }],
+    },
+  });
+  if (!result) {
+    res.json({ msg: "Data tidak ditemukan" });
+  } else {
+    res.render("dashboard/dashboard-products", {
+      layout: "./layout/main",
+      title: "Halaman Data Product",
+      result,
+    });
+    // res.json({ msg: result });
+  }
+});
 
 module.exports = router;

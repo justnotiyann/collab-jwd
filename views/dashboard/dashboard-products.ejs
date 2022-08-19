@@ -3,8 +3,15 @@
     <div class="col-6">
       <h5 class="fw-bold">Halaman Panel Admin</h5>
       <p>Cari data terkait</p>
-      <form action="">
-        <input type="text" class="form-control" />
+      <form action="/products/search" method="post">
+        <div class="row">
+          <div class="col-6">
+            <input type="text" name="search" class="form-control" />
+          </div>
+          <div class="col-6">
+            <button class="btn btn-success">Cari Data</button>
+          </div>
+        </div>
       </form>
     </div>
     <div class="col-6 text-end">
