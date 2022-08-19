@@ -5,10 +5,7 @@ const argon2 = require("argon2");
 // Render all data from database
 router.get("/", async (req, res) => {
   const result = await Users.findAll({
-    order: [
-      ["createdAt", "DESC"],
-      ["updatedAt", "DESC"],
-    ],
+    order: [["updatedAt", "DESC"]],
   });
   if (result.length < 0) {
     res.json({ msg: "Data tidak ditemukan" });
