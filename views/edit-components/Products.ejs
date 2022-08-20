@@ -6,26 +6,26 @@
     </div>
   </div>
   <form action="/products/edit" method="post">
-    <input type="hidden" class="form-control" name="id" value="<%= result.id %>" id="id" placeholder="Masukkan ID Buku" />
+    <input required type="hidden" class="form-control" name="id" value="<%= result.id %>" id="id" placeholder="Masukkan ID Buku" />
     <div class="mb-3">
       <label for="judul_buku" class="form-label fw-bold">Judul Buku</label>
-      <input type="text" class="form-control" name="judul_buku" id="judul_buku" placeholder="Masukkan Judul Buku" />
+      <input required type="text" class="form-control" name="judul_buku" id="judul_buku" placeholder="Masukkan Judul Buku" />
     </div>
     <div class="mb-3">
       <label for="penulis" class="form-label fw-bold">Penulis Buku</label>
-      <input type="text" class="form-control" name="penulis" id="penulis" placeholder="Masukkan Penulis Buku" />
+      <input required type="text" class="form-control" name="penulis" id="penulis" placeholder="Masukkan Penulis Buku" />
     </div>
     <div class="mb-3">
       <label for="kategori" class="form-label fw-bold">Kategori Buku</label>
-      <input type="text" class="form-control" name="kategori" id="kategori" placeholder="Masukkan kategori Buku" />
+      <input required type="text" class="form-control" name="kategori" id="kategori" placeholder="Masukkan kategori Buku" />
     </div>
     <div class="mb-3">
       <label for="penerbit" class="form-label fw-bold">Penerbit Buku</label>
-      <input type="text" class="form-control" name="penerbit" id="penerbit" placeholder="Masukkan penerbit Buku" />
+      <input required type="text" class="form-control" name="penerbit" id="penerbit" placeholder="Masukkan penerbit Buku" />
     </div>
     <div class="mb-3">
       <label for="harga" class="form-label fw-bold">Harga Buku</label>
-      <input type="text" class="form-control" name="harga" id="harga" placeholder="Masukkan harga Buku" />
+      <input required type="text" class="form-control" name="harga" id="harga" placeholder="Masukkan harga Buku" />
     </div>
     <button class="btn btn-success">Update Data</button>
   </form>

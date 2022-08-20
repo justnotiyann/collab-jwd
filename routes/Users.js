@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Users = require("../models/Users");
 const argon2 = require("argon2");
+const { Op } = require("sequelize");
 
 // Render all data from database
 router.get("/", async (req, res) => {
@@ -117,6 +118,30 @@ router.post("/edit", async (req, res) => {
         link: "users",
       });
     }
+  }
+});
+
+// Handling fitur SEARCH
+router.post("/search", async (req, res) => {
+  const { search } = req.body;
+  const result = await Users.findAll({
+    where: {
+      [Op.or]: [{ nama: { [Op.like]: `%${search}%` } }, { email: { [Op.like]: `%${search}%` } }, { nomor_telepon: { [Op.like]: `%${search}%` } }, { jenis_kelamin: { [Op.like]: `%${search}%` } }, { alamat: { [Op.like]: `%${search}%` } }],
+    },
+  });
+  if (!result) {
+    res.render("components/confirm", {
+      layout: "./layout/main",
+      title: "Halaman Data Users",
+      desc: "Gagal Menemukan Data",
+      link: "users",
+    });
+  } else {
+    res.render("dashboard/dashboard-users", {
+      layout: "./layout/main",
+      title: "Halaman Data Product",
+      result,
+    });
   }
 });
 

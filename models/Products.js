@@ -23,15 +23,9 @@ const products = db.define(
   },
   {
     freezeTableName: true,
-    timestamps: false,
   }
 );
 
-try {
-  products.sync({});
-  // console.log("table database baru saja dibuat");
-} catch (error) {
-  // console.log(error);
-}
+products.sync({ force: true });
 
 module.exports = products;
