@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Transaksi = require("../models/Transaksi");
+const { Op } = require("sequelize");
 
 // Render all data from database / READ
 router.get("/", async (req, res) => {
@@ -118,6 +119,38 @@ router.get("/delete/:id", async (req, res) => {
       title: "Berhasil Hapus Data",
       desc: `Berhasil menghapus data ${id}`,
       link: "transaksi",
+    });
+  }
+});
+
+// Handling Fitur SEARCH
+router.post("/search", async (req, res) => {
+  const { search } = req.body;
+  const result = await Transaksi.findAll({
+    where: {
+      [Op.or]: [
+        { nama: { [Op.like]: `%${search}%` } },
+        { email: { [Op.like]: `%${search}%` } },
+        { nomor_telepon: { [Op.like]: `%${search}%` } },
+        { alamat: { [Op.like]: `%${search}%` } },
+        { judul_buku: { [Op.like]: `%${search}%` } },
+        { harga: { [Op.like]: `%${search}%` } },
+        { sistem_pembayaran: { [Op.like]: `%${search}%` } },
+      ],
+    },
+  });
+  if (result.length <= 0) {
+    res.render("components/confirm", {
+      layout: "./layout/main",
+      title: "Gagal mendapatkan data",
+      desc: "Data tidak ditemukan, harap cek kembali",
+      link: "transaksi",
+    });
+  } else {
+    res.render("dashboard/dashboard-transaksi", {
+      layout: "./layout/main",
+      title: "Halaman Data Product",
+      result,
     });
   }
 });
