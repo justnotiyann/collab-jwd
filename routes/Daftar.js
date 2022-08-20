@@ -3,7 +3,10 @@ const Users = require("../models/Users");
 const argon2 = require("argon2");
 
 router.get("/", async (req, res) => {
-  res.json({ msg: "Hello vro" });
+  res.render("sistem-login/daftar", {
+    layout: "./layout/main",
+    title: "Daftar User",
+  });
 });
 
 router.post("/", async (req, res) => {

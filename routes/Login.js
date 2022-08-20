@@ -4,9 +4,11 @@ const Admin = require("../models/Admin");
 
 // GET Landing Login Page
 router.get("/", async (req, res) => {
-  res.render("index", {
+  res.render("sistem-login/login", {
     layout: "./layout/main",
     title: "Halaman Login",
+    desc: "",
+    color: "",
   });
 });
 
@@ -16,14 +18,29 @@ router.post("/", async (req, res) => {
     const { email, password } = req.body;
     const result = await Admin.findOne({ where: { email: email } });
     if (!result) {
-      res.json({ msg: "data tidak ditemukan" });
+      res.render("sistem-login/login", {
+        layout: "./layout/main",
+        title: "Kesalahan login",
+        desc: "Email tidak ditemukan, Harap cek kembali",
+        color: "danger",
+      });
     } else {
       const hash = await argon2.verify(result.password, password);
-      if (!hash) return res.json({ msg: "Password anda salah" });
-      res.render("dashboard", {
-        layout: "./layout/main",
-        title: "Halaman Dashboard",
-      });
+      if (!hash) {
+        res.render("sistem-login/login", {
+          layout: "./layout/main",
+          title: "Kesalahan login",
+          desc: "Password salah harap cek kembali",
+          color: "danger",
+        });
+      } else {
+        res.render("sistem-login/login", {
+          layout: "./layout/main",
+          title: "Berhasil Login",
+          desc: "Berhasil Login",
+          color: "success",
+        });
+      }
     }
   } catch (error) {
     res.json({ msg: error.message });
@@ -37,7 +54,7 @@ router.post("/add", async (req, res) => {
     const hash = await argon2.hash(password);
     const result = await Admin.create({ email: email, password: hash });
     if (!result) return res.sendStatus(403).json({ msg: "Gagal Membuat Data" });
-    res.sendStatus(200).json({ msg: "Berhasil Membuat Data" });
+    res.json({ msg: "Berhasil daftar admin" });
   } catch (error) {
     res.json({ msg: error.message });
   }
