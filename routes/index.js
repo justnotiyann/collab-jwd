@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
   } else {
     res.render("index", {
       layout: "./layout/main",
-      title: "Halaman Login",
+      title: "Halaman Utama",
       result,
     });
   }
