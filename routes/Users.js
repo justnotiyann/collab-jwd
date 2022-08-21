@@ -2,6 +2,7 @@ const router = require("express").Router();
 const Users = require("../models/Users");
 const argon2 = require("argon2");
 const { Op } = require("sequelize");
+const { confirmUI } = require("./component");
 
 // Render all data from database
 router.get("/", async (req, res) => {
@@ -30,32 +31,27 @@ router.get("/add", async (req, res) => {
 // Handling ADD / TAMBAH user
 router.post("/add", async (req, res) => {
   const { nama, email, nomor_telepon, password, confirm, jenis_kelamin, alamat } = req.body;
-  if (password != confirm) {
-    res.render("components/confirm", {
-      layout: "./layout/main",
-      title: "Gagal Input Data",
-      desc: "Password tidak cocok harap masukkan ulang",
-      link: "users",
-    });
+  const getEmailName = await Users.findOne({ where: { [Op.or]: [{ email: email }, { nama: nama }] } });
+  if (getEmailName) {
+    confirmUI("Gagal tambah data", "Email / Nama sudah digunakan silahkan inputkan kembali", "users/add", res);
   } else {
-    const hash = await argon2.hash(password);
-    const result = await Users.create({
-      nama: nama,
-      email: email,
-      nomor_telepon: nomor_telepon,
-      password: hash,
-      jenis_kelamin: jenis_kelamin,
-      alamat: alamat,
-    });
-    if (!result) {
-      res.json({ msg: "Terjadi kesalahan" });
+    if (password != confirm) {
+      confirmUI("Gagal tambah data", "Password tidak sama", "users/add", res);
     } else {
-      res.render("components/confirm", {
-        layout: "./layout/main",
-        title: "Berhasil Menambahkan User",
-        desc: `Berhasil menambahkan user ${nama}`,
-        link: "users",
+      const hash = await argon2.hash(password);
+      const result = await Users.create({
+        nama: nama,
+        email: email,
+        nomor_telepon: nomor_telepon,
+        password: hash,
+        jenis_kelamin: jenis_kelamin,
+        alamat: alamat,
       });
+      if (!result) {
+        confirmUI("Terjadi Kesalahan", `${result}`, "users", res);
+      } else {
+        confirmUI("Berhasil tambah data", `Berhasil menambahkan data ${nama}`, "users", res);
+      }
     }
   }
 });
@@ -93,7 +89,7 @@ router.get("/edit/:id", async (req, res) => {
 
 // Handling form EDIT Users
 router.post("/edit", async (req, res) => {
-  const { id, nama, email, password, confirm } = req.body;
+  const { id, nama, email, nomor_telepon, password, jenis_kelamin, confirm } = req.body;
   if (password != confirm) {
     res.json({ msg: "Password tidak sama harap cek kembali" });
   } else {
@@ -102,6 +98,8 @@ router.post("/edit", async (req, res) => {
       {
         nama: nama,
         email: email,
+        nomor_telepon: nomor_telepon,
+        jenis_kelamin: jenis_kelamin,
         password: hash,
       },
       {

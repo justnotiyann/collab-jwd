@@ -1,4 +1,4 @@
-<div class="container p-3" style="margin-top: 2em">
+<div class="container-fluid p-2" style="margin-top: 2em">
   <div class="row d-flex justify-content-evenly align-items-center mb-5">
     <div class="col-sm-6 col-lg-6 mb-5">
       <h5 class="fw-bold">Halaman Panel Admin</h5>
@@ -42,7 +42,7 @@
         <td><%= datas.penulis %></td>
         <td><%= datas.kategori %></td>
         <td><%= datas.penerbit %></td>
-        <td><%= datas.harga %></td>
+        <td>Rp. <%= datas.harga %></td>
         <td>
           <a href="/products/delete/<%= datas.id %> " onclick="return confirm('Anda yakin?')">
             <button class="btn btn-danger badge">Hapus Data</button>

@@ -4,7 +4,7 @@ const { Op } = require("sequelize");
 
 // Render all data from database / READ
 router.get("/", async (req, res) => {
-  const result = await Transaksi.findAll({ order: [["createdAt", "DESC"]] });
+  const result = await Transaksi.findAll({ order: [["updatedAt", "DESC"]] });
   res.render("dashboard/dashboard-transaksi", {
     layout: "./layout/main",
     title: "Halaman Transaksi Users",

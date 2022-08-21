@@ -4,7 +4,7 @@ const Product = require("../models/Products");
 
 // GET Landing Page and Product
 router.get("/", async (req, res) => {
-  const result = await Product.findAll({ order: [["createdAt", "DESC"]] });
+  const result = await Product.findAll({ order: [["updatedAt", "DESC"]] });
   if (!result) {
     res.json({ msg: "Terjadi kesalahan" });
   } else {
