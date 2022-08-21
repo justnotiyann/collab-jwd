@@ -7,4 +7,13 @@ const confirmUI = (title, desc, link, res) => {
   });
 };
 
-module.exports = { confirmUI };
+const loginUI = (title, desc, color, res) => {
+  res.render("sistem-login/login", {
+    layout: "./layout/main",
+    title: title,
+    desc: desc,
+    color: color,
+  });
+};
+
+module.exports = { confirmUI, loginUI };

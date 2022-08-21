@@ -1,9 +1,43 @@
 const express = require("express");
+const app = express();
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const ejsLayout = require("express-ejs-layouts");
-const app = express();
+const db = require("./config/db");
+const session = require("express-session");
+const SequelizeStore = require("connect-session-sequelize");
+const cors = require("cors");
+
+// initalize sequelize with session store
+const sessionStore = SequelizeStore(session.Store);
+
+const store = new sessionStore({
+  db: db,
+  checkExpirationInterval: 15 * 60 * 1000, // The interval at which to cleanup expired sessions in milliseconds.
+  expiration: 10 * 1000, // The maximum age (in milliseconds) of a valid session.
+});
+// configure express
+app.use(
+  session({
+    secret: "collabjwd-tokobuku",
+    resave: false,
+    saveUninitialized: true,
+    store: store,
+    cookie: {
+      secure: "auto",
+    },
+  })
+);
+db.sync();
+
+// CORS
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:3000",
+  })
+);
 
 app.listen(3000, () => {
   console.log("server berjalan");

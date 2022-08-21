@@ -1,15 +1,11 @@
 const router = require("express").Router();
 const argon2 = require("argon2");
 const Admin = require("../models/Admin");
+const { confirmUI, loginUI } = require("./component");
 
 // GET Landing Login Page
 router.get("/", async (req, res) => {
-  res.render("sistem-login/login", {
-    layout: "./layout/main",
-    title: "Halaman Login",
-    desc: "",
-    color: "",
-  });
+  loginUI("Halaman Login Admin", "", "", res);
 });
 
 // Login admin
@@ -18,28 +14,14 @@ router.post("/", async (req, res) => {
     const { email, password } = req.body;
     const result = await Admin.findOne({ where: { email: email } });
     if (!result) {
-      res.render("sistem-login/login", {
-        layout: "./layout/main",
-        title: "Kesalahan login",
-        desc: "Email tidak ditemukan, Harap cek kembali",
-        color: "danger",
-      });
+      loginUI("Kesalahan Login", "Email tidak ditemukan, Harap cek kembali", "danger", res);
     } else {
       const hash = await argon2.verify(result.password, password);
       if (!hash) {
-        res.render("sistem-login/login", {
-          layout: "./layout/main",
-          title: "Kesalahan login",
-          desc: "Password salah harap cek kembali",
-          color: "danger",
-        });
+        loginUI("Kesalahan Login", "Password salah, Harap cek kembali", "danger", res);
       } else {
-        res.render("sistem-login/login", {
-          layout: "./layout/main",
-          title: "Berhasil Login",
-          desc: "Berhasil Login",
-          color: "success",
-        });
+        req.session.id = result.id;
+        loginUI("Berhasil Login", "Selamat Datang", "success", res);
       }
     }
   } catch (error) {
@@ -58,6 +40,16 @@ router.post("/add", async (req, res) => {
   } catch (error) {
     res.json({ msg: error.message });
   }
+});
+
+router.get("/logout", async (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      confirmUI("Berhasil Log Out", "Berhasil LogOut", "login", res);
+    } else {
+      confirmUI("Gagal Log Out", "Gagal LogOut", "login", res);
+    }
+  });
 });
 
 module.exports = router;
