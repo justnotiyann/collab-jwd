@@ -26,7 +26,7 @@
       <div class="col-4">
         <div class="mb-3">
           <label for="nomor_telepon	" class="form-label fw-bold">Nomor Telepon</label>
-          <input type="text" class="form-control" name="nomor_telepon" id="nomor_telepon" required placeholder="<%= result.nomor_telepon %>" />
+          <input type="text" class="form-control" maxlength="12" minlength="9" name="nomor_telepon" id="nomor_telepon" required placeholder="<%= result.nomor_telepon %>" />
         </div>
       </div>
       <!-- alamat -->
@@ -40,21 +40,21 @@
       <div class="col-4">
         <div class="mb-3">
           <label for="judul_buku" class="form-label fw-bold">Judul Buku</label>
-          <input type="text" class="form-control" name="judul_buku" id="judul_buku" required placeholder="<%= result.judul_buku %>" />
+          <input type="text" class="form-control" name="judul_buku" id="judul_buku" readonly value="<%= result.judul_buku %>" placeholder="<%= result.judul_buku %>" />
         </div>
       </div>
       <!-- harga -->
       <div class="col-4">
         <div class="mb-3">
           <label for="harga	" class="form-label fw-bold">Haga Buku</label>
-          <input type="text" class="form-control" name="harga" id="harga" required readonly value="<%= result.harga %>" placeholder="<%= result.harga %>" />
+          <input type="text" class="form-control" name="harga" id="harga" readonly value="<%= result.harga %>" placeholder="<%= result.harga %>" />
         </div>
       </div>
       <!-- sistem_pembayaran -->
       <div class="col-4">
         <div class="mb-3">
           <label for="sistem_pembayaran	" class="form-label fw-bold">Sistem Pembayaran</label>
-          <input type="text" class="form-control" name="sistem_pembayaran" id="sistem_pembayaran" required placeholder="<%= result.sistem_pembayaran %>" />
+          <input type="text" class="form-control" name="sistem_pembayaran" id="sistem_pembayaran" readonly value="<%= result.sistem_pembayaran %>" placeholder="<%= result.sistem_pembayaran %>" />
         </div>
       </div>
     </div>

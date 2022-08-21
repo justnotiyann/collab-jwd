@@ -63,12 +63,7 @@ router.get("/delete/:id", async (req, res) => {
   if (result.length < 0) {
     res.json({ msg: "Data tidak ditemukan" });
   } else {
-    res.render("components/confirm", {
-      layout: "./layout/main",
-      title: "Data berhasil dihapus",
-      desc: `Data Users ${id} Berhasil dihapus`,
-      link: "users",
-    });
+    confirmUI("Berhasil menghapus data", `Data user ${id} berhasil dihapus`, "users", res);
   }
 });
 
@@ -89,32 +84,33 @@ router.get("/edit/:id", async (req, res) => {
 
 // Handling form EDIT Users
 router.post("/edit", async (req, res) => {
-  const { id, nama, email, nomor_telepon, password, jenis_kelamin, confirm } = req.body;
-  if (password != confirm) {
-    res.json({ msg: "Password tidak sama harap cek kembali" });
+  const { id, nama, email, nomor_telepon, password, jenis_kelamin, confirm, alamat } = req.body;
+  const getEmailName = await Users.findOne({ where: { [Op.or]: [{ nama: nama }, { email: email }] } });
+  if (getEmailName) {
+    confirmUI("Gagal edit data", "Nama / Email sudah digunakan harap inputkan kembali.", "users", res);
   } else {
-    const hash = await argon2.hash(password);
-    const result = await Users.update(
-      {
-        nama: nama,
-        email: email,
-        nomor_telepon: nomor_telepon,
-        jenis_kelamin: jenis_kelamin,
-        password: hash,
-      },
-      {
-        where: { id: id },
-      }
-    );
-    if (!result) {
-      res.json({ msg: "Terjadi kesalahan" });
+    if (password != confirm) {
+      confirmUI("Gagal edit data", "Password tidak sama harap inputkan kembali.", "users", res);
     } else {
-      res.render("components/confirm", {
-        layout: "./layout/main",
-        title: "Berhasil edit user",
-        desc: "Berhasil edit user",
-        link: "users",
-      });
+      const hash = await argon2.hash(password);
+      const result = await Users.update(
+        {
+          nama: nama,
+          email: email,
+          nomor_telepon: nomor_telepon,
+          password: hash,
+          jenis_kelamin: jenis_kelamin,
+          alamat: alamat,
+        },
+        {
+          where: { id: id },
+        }
+      );
+      if (!result) {
+        res.json({ msg: "Terjadi kesalahan" });
+      } else {
+        confirmUI("Berhasil edit user", "Berhasil edit user", "users", res);
+      }
     }
   }
 });
@@ -128,12 +124,7 @@ router.post("/search", async (req, res) => {
     },
   });
   if (!result) {
-    res.render("components/confirm", {
-      layout: "./layout/main",
-      title: "Halaman Data Users",
-      desc: "Gagal Menemukan Data",
-      link: "users",
-    });
+    confirmUI("Halaman Data User", "Gagal menemukan data", "users", res);
   } else {
     res.render("dashboard/dashboard-users", {
       layout: "./layout/main",

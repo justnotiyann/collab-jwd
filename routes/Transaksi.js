@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Transaksi = require("../models/Transaksi");
 const { Op } = require("sequelize");
+const { confirmUI } = require("./component");
 
 // Render all data from database / READ
 router.get("/", async (req, res) => {
@@ -33,19 +34,9 @@ router.post("/add", async (req, res) => {
     sistem_pembayaran: sistem_pembayaran,
   });
   if (!result) {
-    res.render("components/confirm", {
-      layout: "./layout/main",
-      title: "Gagal input data",
-      desc: "Gagal input data",
-      link: "transaksi/add",
-    });
+    confirmUI("Gagal input data", "Gagal input data", "transaksi/add", res);
   } else {
-    res.render("components/confirm", {
-      layout: "./layout/main",
-      title: "Berhasil input data",
-      desc: "Berhasil input data",
-      link: "transaksi",
-    });
+    confirmUI("Berhasil input data", "Berhasil input data", "transaksi", res);
   }
 });
 
@@ -54,12 +45,7 @@ router.get("/edit/:id", async (req, res) => {
   const id = req.params.id;
   const result = await Transaksi.findOne({ where: { id: id } });
   if (!result) {
-    res.render("components/confirm", {
-      layout: "./layout/main",
-      title: "Gagal mendapatkan data",
-      desc: "Gagal mendapatkan data",
-      link: "transaksi",
-    });
+    confirmUI("Gagal mendapatkan data", "Gagal mendapatkan data", "transaksi", res);
   } else {
     res.render("edit-components/Transaksi", {
       layout: "./layout/main",
@@ -86,19 +72,9 @@ router.post("/edit", async (req, res) => {
     }
   );
   if (!result) {
-    res.render("components/confirm", {
-      layout: "./layout/main",
-      title: "Gagal edit data",
-      desc: "Gagal edit data",
-      link: "transaksi/edit",
-    });
+    confirmUI("Gagal edit data", "Gagal edit data", "transaksi", res);
   } else {
-    res.render("components/confirm", {
-      layout: "./layout/main",
-      title: "Berhasil mendapatkan data",
-      desc: `Berhasil edit data `,
-      link: "transaksi",
-    });
+    confirmUI("Gagal edit data", "Gagal edit data", "transaksi", res);
   }
 });
 
@@ -107,19 +83,9 @@ router.get("/delete/:id", async (req, res) => {
   const id = req.params.id;
   const result = await Transaksi.destroy({ where: { nama: id } });
   if (!result) {
-    res.render("components/confirm", {
-      layout: "./layout/main",
-      title: "Gagal Hapus Data",
-      desc: `Gagal menghapus data ${id}`,
-      link: "transaksi",
-    });
+    confirmUI("Gagal hapus data", "Gagal hapus data", "transaksi", res);
   } else {
-    res.render("components/confirm", {
-      layout: "./layout/main",
-      title: "Berhasil Hapus Data",
-      desc: `Berhasil menghapus data ${id}`,
-      link: "transaksi",
-    });
+    confirmUI("Berhasil hapus data", "Berhasil hapus data", "transaksi", res);
   }
 });
 
@@ -140,12 +106,7 @@ router.post("/search", async (req, res) => {
     },
   });
   if (result.length <= 0) {
-    res.render("components/confirm", {
-      layout: "./layout/main",
-      title: "Gagal mendapatkan data",
-      desc: "Data tidak ditemukan, harap cek kembali",
-      link: "transaksi",
-    });
+    confirm("Gagal mendapatkan data", "Gagal mendapatkan data", "transaksi", res);
   } else {
     res.render("dashboard/dashboard-transaksi", {
       layout: "./layout/main",

@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { Op } = require("sequelize");
 const Product = require("../models/Products");
+const { confirmUI } = require("./component");
 
 // GET Landing Page and Product
 router.get("/", async (req, res) => {
@@ -34,19 +35,9 @@ router.post("/add", async (req, res) => {
     harga: harga,
   });
   if (!result) {
-    res.render("components/confirm", {
-      layout: "./layout/main",
-      title: "Gagal input data",
-      desc: "Gagal input data",
-      link: "products/add",
-    });
+    confirmUI("Gagal input data", "Gagal input data", "products/add", res);
   } else {
-    res.render("components/confirm", {
-      layout: "./layout/main",
-      title: "Berhasil input data",
-      desc: "Berhasil input data",
-      link: "products",
-    });
+    confirmUI("Berhasil input data", "Berhasil input data", "products", res);
   }
 });
 
@@ -83,12 +74,7 @@ router.post("/edit", async (req, res) => {
   if (!result) {
     res.json({ msg: "Data tidak ditemukan" });
   } else {
-    res.render("components/confirm", {
-      layout: "./layout/main",
-      title: "Berhasil Di Update",
-      desc: "Data berhasil diupdate",
-      link: "products",
-    });
+    confirmUI("Berhasil input data", "Berhasil edit data", "products", res);
   }
 });
 
@@ -99,13 +85,7 @@ router.get("/delete/:id", async (req, res) => {
   if (!result) {
     res.json({ msg: "Data tidak ditemukan" });
   } else {
-    res.render("components/confirm", {
-      layout: "./layout/main",
-      title: "Data Berhasil Dihapus",
-      desc: "Sukses Menghapus Data",
-      link: "products",
-    });
-    // res.json({ msg: "Data berhasil dihapus" });
+    confirmUI("Berhasil hapus data", "Berhasil hapus data", "products", res);
   }
 });
 
