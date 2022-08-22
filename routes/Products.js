@@ -18,6 +18,15 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/pagination", async (req, res) => {
+  const result = await Product.findAll({});
+  res.render("dashboard/dashboard-pagination", {
+    layout: "./layout/main",
+    title: "Form Tambah Products",
+    result,
+  });
+});
+
 // GET form add products
 router.get("/add", (req, res) => {
   res.render("tambah-components/Products", {
