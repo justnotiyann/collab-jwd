@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
 
+html {
+  scroll-behavior: smooth;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -20,4 +24,8 @@ body {
 
 .section-margin {
   margin-top: 10em;
+}
+
+#mytable {
+  margin-bottom: 2em;
 }

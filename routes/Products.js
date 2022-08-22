@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { Op } = require("sequelize");
 const Product = require("../models/Products");
-const { confirmUI } = require("./component");
+const { confirmUI, renderUI } = require("./component");
 const verifyUser = require("../middleware/Auth");
 
 // GET Landing Page and Product

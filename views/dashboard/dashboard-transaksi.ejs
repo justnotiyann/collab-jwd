@@ -1,28 +1,18 @@
-<div class="container p-3" style="margin-top: 2em">
-  <div class="row d-flex justify-content-evenly align-items-center mb-5">
-    <div class="col-6">
-      <h5 class="fw-bold">Halaman Panel Admin</h5>
-      <p>Cari data terkait</p>
-      <form action="/transaksi/search" method="post">
-        <div class="row">
-          <div class="col">
-            <input type="text" name="search" class="form-control" />
-          </div>
-          <div class="col">
-            <button class="btn btn-success">Search</button>
-          </div>
-        </div>
-      </form>
+<div class="container-fluid" style="margin-top: 2em">
+  <div class="row mb-3">
+    <div class="col-8">
+      <h2 class="text-success fw-bold">Data Transaksi Toko Buku</h2>
+      <p class="text-muted">Berikut semua data yang disimpan dalam database kami</p>
     </div>
-    <div class="col-6 text-end">
-      <h4>Tambah Data Products</h4>
+    <div class="col-4">
+      <h4>Tambah Data Transaksi</h4>
       <p>
-        Link <span><a href="/transaksi/add" class="text-primary">Tambah Data Transaksi</a></span>
+        Link <span><a href="/transaksi/add" style="text-decoration: none" class="text-success fw-bold">Tambah Data Product</a></span>
       </p>
     </div>
   </div>
 
-  <table class="table mt-3">
+  <table class="table mt-3 table-hover" id="mytable">
     <thead class="table-success">
       <tr>
         <th scope="col">No</th>

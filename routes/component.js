@@ -16,4 +16,14 @@ const loginUI = (title, desc, color, res) => {
   });
 };
 
-module.exports = { confirmUI, loginUI };
+const renderUI = (getTitlePage, getJudul, getAddTitle, getAddLink, res) => {
+  res.render("dashboard/dashboard", {
+    layout: "./layout/main",
+    title: getTitlePage,
+    getJudul: getJudul,
+    getAddTitle: getAddTitle,
+    getAddLink: getAddLink,
+  });
+};
+
+module.exports = { confirmUI, loginUI, renderUI };
