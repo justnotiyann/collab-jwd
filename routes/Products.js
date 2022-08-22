@@ -58,7 +58,7 @@ router.get("/edit/:id", async (req, res) => {
 });
 
 // EDIT Handling For Product Table
-router.post("/edit", async (req, res) => {
+router.post("/edit", verifyUser, async (req, res) => {
   const { id, judul_buku, penulis, kategori, penerbit, harga } = req.body;
   const result = Product.update(
     {
@@ -80,7 +80,7 @@ router.post("/edit", async (req, res) => {
 });
 
 // DELETE Handling For Product Table
-router.get("/delete/:id", async (req, res) => {
+router.get("/delete/:id", verifyUser, async (req, res) => {
   const id = req.params.id;
   const result = await Product.destroy({ where: { id: id } });
   if (!result) {

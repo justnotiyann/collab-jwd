@@ -2,6 +2,7 @@ const router = require("express").Router();
 const Transaksi = require("../models/Transaksi");
 const { Op } = require("sequelize");
 const { confirmUI } = require("./component");
+const verifyUser = require("../middleware/Auth");
 
 // Render all data from database / READ
 router.get("/", async (req, res) => {
@@ -22,7 +23,7 @@ router.get("/add", async (req, res) => {
 });
 
 // Handling ADD
-router.post("/add", async (req, res) => {
+router.post("/add", verifyUser, async (req, res) => {
   const { nama, email, nomor_telepon, alamat, judul_buku, harga, sistem_pembayaran } = req.body;
   const result = await Transaksi.create({
     nama: nama,
@@ -55,7 +56,7 @@ router.get("/edit/:id", async (req, res) => {
   }
 });
 
-router.post("/edit", async (req, res) => {
+router.post("/edit", verifyUser, async (req, res) => {
   const { id, nama, email, nomor_telepon, alamat, judul_buku, harga, sistem_pembayaran } = req.body;
   const result = await Transaksi.update(
     {
@@ -79,7 +80,7 @@ router.post("/edit", async (req, res) => {
 });
 
 // Handling DELETE data
-router.get("/delete/:id", async (req, res) => {
+router.get("/delete/:id", verifyUser, async (req, res) => {
   const id = req.params.id;
   const result = await Transaksi.destroy({ where: { nama: id } });
   if (!result) {

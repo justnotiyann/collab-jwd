@@ -3,6 +3,7 @@ const Users = require("../models/Users");
 const argon2 = require("argon2");
 const { Op } = require("sequelize");
 const { confirmUI } = require("./component");
+const verifyUser = require("../middleware/Auth");
 
 // Render all data from database
 router.get("/", async (req, res) => {
@@ -29,7 +30,7 @@ router.get("/add", async (req, res) => {
 });
 
 // Handling ADD / TAMBAH user
-router.post("/add", async (req, res) => {
+router.post("/add", verifyUser, async (req, res) => {
   const { nama, email, nomor_telepon, password, confirm, jenis_kelamin, alamat } = req.body;
   const getEmailName = await Users.findOne({ where: { [Op.or]: [{ email: email }, { nama: nama }] } });
   if (getEmailName) {
@@ -57,7 +58,7 @@ router.post("/add", async (req, res) => {
 });
 
 // DELETE Handling for USERS table
-router.get("/delete/:id", async (req, res) => {
+router.get("/delete/:id", verifyUser, async (req, res) => {
   const id = req.params.id;
   const result = await Users.destroy({ where: { nama: id } });
   if (result.length < 0) {
@@ -83,7 +84,7 @@ router.get("/edit/:id", async (req, res) => {
 });
 
 // Handling form EDIT Users
-router.post("/edit", async (req, res) => {
+router.post("/edit", verifyUser, async (req, res) => {
   const { id, nama, email, nomor_telepon, password, jenis_kelamin, confirm, alamat } = req.body;
   const getEmailName = await Users.findOne({ where: { [Op.or]: [{ nama: nama }, { email: email }] } });
   if (getEmailName) {
