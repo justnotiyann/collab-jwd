@@ -12,10 +12,9 @@ const cors = require("cors");
 // initalize sequelize with session store
 const sessionStore = SequelizeStore(session.Store);
 
+// sync
 const store = new sessionStore({
   db: db,
-  checkExpirationInterval: 15 * 60 * 1000, // The interval at which to cleanup expired sessions in milliseconds.
-  expiration: 10 * 1000, // The maximum age (in milliseconds) of a valid session.
 });
 // configure express
 app.use(
@@ -29,7 +28,6 @@ app.use(
     },
   })
 );
-db.sync();
 
 // CORS
 app.use(
@@ -43,6 +41,7 @@ app.listen(3000, () => {
   console.log("server berjalan");
 });
 
+app.use(express.json());
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(ejsLayout);

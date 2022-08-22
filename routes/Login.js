@@ -20,7 +20,7 @@ router.post("/", async (req, res) => {
       if (!hash) {
         loginUI("Kesalahan Login", "Password salah, Harap cek kembali", "danger", res);
       } else {
-        req.session.id = result.id;
+        let session = (req.session.userid = result.id);
         loginUI("Berhasil Login", "Selamat Datang", "success", res);
       }
     }

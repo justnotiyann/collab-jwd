@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { Op } = require("sequelize");
 const Product = require("../models/Products");
 const { confirmUI } = require("./component");
+const verifyUser = require("../middleware/Auth");
 
 // GET Landing Page and Product
 router.get("/", async (req, res) => {
@@ -25,7 +26,7 @@ router.get("/add", (req, res) => {
   });
 });
 
-router.post("/add", async (req, res) => {
+router.post("/add", verifyUser, async (req, res) => {
   const { judul_buku, penulis, kategori, penerbit, harga } = req.body;
   const result = await Product.create({
     judul_buku: judul_buku,
