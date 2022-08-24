@@ -8,6 +8,7 @@ const db = require("./config/db");
 const session = require("express-session");
 const SequelizeStore = require("connect-session-sequelize");
 const cors = require("cors");
+const port = process.env.PORT || 3000;
 
 // initalize sequelize with session store
 const sessionStore = SequelizeStore(session.Store);
@@ -40,7 +41,7 @@ app.use(
   })
 );
 
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log("server berjalan");
 });
 
