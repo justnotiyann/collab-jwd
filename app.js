@@ -8,6 +8,7 @@ const db = require("./config/db");
 const session = require("express-session");
 const SequelizeStore = require("connect-session-sequelize");
 const cors = require("cors");
+const port = process.env.PORT || 3000;
 
 // initalize sequelize with session store
 const sessionStore = SequelizeStore(session.Store);
@@ -15,8 +16,8 @@ const sessionStore = SequelizeStore(session.Store);
 // sync
 const store = new sessionStore({
   db: db,
-  // checkExpirationInterval: 15 * 60 * 1000, // The interval at which to cleanup expired sessions in milliseconds.
-  // expiration: 0.1 * 60 * 60 * 1000, // The maximum age (in milliseconds) of a valid session.
+  checkExpirationInterval: 15 * 60 * 1000, // The interval at which to cleanup expired sessions in milliseconds.
+  expiration: 0.1 * 60 * 60 * 1000, // The maximum age (in milliseconds) of a valid session.
 });
 
 // configure express
@@ -40,7 +41,7 @@ app.use(
   })
 );
 
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log("server berjalan");
 });
 
