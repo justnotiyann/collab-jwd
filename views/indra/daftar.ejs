@@ -1,0 +1,17 @@
+<div class="card register-form">
+    <h1 style="font-size: 20px; text-align: center;">Silahkan Isi Data diri anda</h1><br>
+    <label>Nama</label><br>
+    <input type="text" name="nama" placeholder="Masukan Nama" required> <br>
+    <label>Email</label> <br>
+    <input type="email" name="email" placeholder="Masukan Email" required> <br>
+    <label>Password</label><br>
+    <input type="password" name="password" placeholder="Masukan Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Harus berisi setidaknya satu angka dan satu huruf besar dan kecil, dan setidaknya 8 karakter atau lebih" required> <br>
+    <div class="gender">
+        <label for="gender">Jenis Kelamin</label><br>
+        <input type="radio" name="gender" value="L" required>Pria <nbsp%></nbsp>
+        <input type="radio" name="gender" value="P" required>Wanita<br><br>
+    </div>
+    <label for="alamat">Alamat</label>
+    <textarea rows="3" name="alamat" placeholder="Masukan Alamat" style="margin-bottom:20px ;" required></textarea>
+    <input class="submit-btn" type="submit" name="daftar" value="Daftar">
+</div>
