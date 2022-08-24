@@ -1,0 +1,64 @@
+<div class="container section-margin p-5">
+  <div class="row mb-5">
+    <div class="col-6">
+      <h3>Halaman Tambah User</h3>
+      <p>Perhatikan saat input data, Pastikan masukkan data dengan benar</p>
+    </div>
+  </div>
+  <form action="/transaksi/edit" method="post">
+    <input type="hidden" clss="form-control" name="id" value="<%= result.id %>" id="id" required placeholder="Masukkan ID" />
+    <div class="row">
+      <!-- Nama -->
+      <div class="col-4">
+        <div class="mb-3">
+          <label for="nama" class="form-label fw-bold">Nama User</label>
+          <input type="text" class="form-control" name="nama" id="nama" required placeholder="<%= result.nama %> " />
+        </div>
+      </div>
+      <!-- Email -->
+      <div class="col-4">
+        <div class="mb-3">
+          <label for="email" class="form-label fw-bold">Email user</label>
+          <input type="text" class="form-control" name="email" id="email" required placeholder="<%= result.email %>" />
+        </div>
+      </div>
+      <!-- nomor_telepon -->
+      <div class="col-4">
+        <div class="mb-3">
+          <label for="nomor_telepon	" class="form-label fw-bold">Nomor Telepon</label>
+          <input type="text" class="form-control" maxlength="12" minlength="9" name="nomor_telepon" id="nomor_telepon" required placeholder="<%= result.nomor_telepon %>" />
+        </div>
+      </div>
+      <!-- alamat -->
+      <div class="col-12">
+        <div class="mb-3">
+          <label for="alamat" class="form-label fw-bold">Alamat User</label>
+          <textarea class="form-control" name="alamat" id="alamat" rows="3" required placeholder="<%= result.alamat %>"></textarea>
+        </div>
+      </div>
+      <!-- judul_buku-->
+      <div class="col-4">
+        <div class="mb-3">
+          <label for="judul_buku" class="form-label fw-bold">Judul Buku</label>
+          <input type="text" class="form-control" name="judul_buku" id="judul_buku" readonly value="<%= result.judul_buku %>" placeholder="<%= result.judul_buku %>" />
+        </div>
+      </div>
+      <!-- harga -->
+      <div class="col-4">
+        <div class="mb-3">
+          <label for="harga	" class="form-label fw-bold">Haga Buku</label>
+          <input type="text" class="form-control" name="harga" id="harga" readonly value="<%= result.harga %>" placeholder="<%= result.harga %>" />
+        </div>
+      </div>
+      <!-- sistem_pembayaran -->
+      <div class="col-4">
+        <div class="mb-3">
+          <label for="sistem_pembayaran	" class="form-label fw-bold">Sistem Pembayaran</label>
+          <input type="text" class="form-control" name="sistem_pembayaran" id="sistem_pembayaran" readonly value="<%= result.sistem_pembayaran %>" placeholder="<%= result.sistem_pembayaran %>" />
+        </div>
+      </div>
+    </div>
+    <input type="reset" value="Reset Data" class="btn btn-danger" />
+    <button class="btn btn-success">Submit Data</button>
+  </form>
+</div>

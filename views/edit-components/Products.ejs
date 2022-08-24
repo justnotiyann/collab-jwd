@@ -1,0 +1,53 @@
+<div class="container p-5 section-margin">
+  <div class="row mb-5">
+    <div class="col-6">
+      <h4>Halaman Edit Products</h4>
+      <p class="text-muted">Harap pastikan input product dengan benar</p>
+    </div>
+  </div>
+  <form action="/products/edit" method="post">
+    <div class="row">
+      <div class="col-6">
+        <input required type="hidden" class="form-control" name="id" value="<%= result.id %>" id="id" placeholder="Masukkan ID Buku" />
+        <div class="mb-3">
+          <label for="judul_buku" class="form-label fw-bold">Judul Buku</label>
+          <input required type="text" class="form-control" name="judul_buku" id="judul_buku" placeholder="<%= result.judul_buku %>" />
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="mb-3">
+          <label for="penulis" class="form-label fw-bold">Penulis Buku</label>
+          <input required type="text" class="form-control" name="penulis" id="penulis" placeholder="<%= result.penulis %>" />
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="mb-3">
+          <label for="penerbit" class="form-label fw-bold">Penerbit Buku</label>
+          <input required type="text" class="form-control" name="penerbit" id="penerbit" placeholder="<%= result.penerbit %>" />
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="mb-3">
+          <label for="kategori" class="form-label fw-bold">Masukkan Kategori</label>
+          <select class="form-control" name="kategori" id="kategori">
+            <option value="Programming">Programming</option>
+            <option value="website-dev">Website Developer</option>
+            <option value="tips">Tips And Tricks</option>
+            <option value="self-dev">Self Development</option>
+            <option value="mobile-dev">Mobile Dev Development</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="mb-3">
+          <label for="harga" class="form-label fw-bold">Harga Buku</label>
+          <input required type="text" class="form-control" name="harga" id="harga" placeholder="<%= result.harga %>" />
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-success" id="buttonUpdate">Update Data</button>
+  </form>
+</div>
