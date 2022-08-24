@@ -1,7 +1,12 @@
 const Sequelize = require("sequelize");
 
-const db = new Sequelize("freedb_collab_jwd", "freedb_iyanxdev", "2!hcu5%8&GbqKj#", {
-  host: "sql.freedb.tech",
+let database = "sql6514820";
+let user = "sql6514820";
+let password = "S81LSiHxqX";
+let host = "sql6.freemysqlhosting.net";
+
+const db = new Sequelize(database, user, password, {
+  host: host,
   port: 3306,
   dialect: "mysql",
 });
