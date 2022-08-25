@@ -1,70 +1,66 @@
 <div class="container p-5 section-margin">
   <div class="row mb-5">
-    <div class="col-6">
-      <h4>Halaman Edit Users</h4>
-      <p class="text-muted">Harap pastikan input user dengan benar</p>
+    <div class="col-sm-12 col-lg-6">
+      <a href="/users" style="text-decoration: none">
+        <h3 class="fw-bold text-success">Halaman Edit User</h3>
+      </a>
+      <p class="text-muted">Perhatikan saat edit data,Harap masukkan data dengan benar</p>
     </div>
   </div>
   <form action="/users/edit" method="post">
     <input type="hidden" clss="form-control" name="id" value="<%= result.id %>" id="id" required placeholder="Masukkan ID" />
     <div class="row">
       <!-- Nama -->
-      <div class="col-4">
+      <div class="col-sm-12 col-md-4">
         <div class="mb-3">
           <label for="nama" class="form-label fw-bold">Nama User</label>
           <input type="text" class="form-control" name="nama" id="nama" required placeholder="<%= result.nama %> " />
         </div>
       </div>
       <!-- Email -->
-      <div class="col-4">
+      <div class="col-sm-12 col-md-4">
         <div class="mb-3">
           <label for="email" class="form-label fw-bold">Email user</label>
           <input type="text" class="form-control" name="email" id="email" required placeholder="<%= result.email %>" />
         </div>
       </div>
       <!-- nomor_telepon -->
-      <div class="col-4">
+      <div class="col-sm-12 col-md-4">
         <div class="mb-3">
           <label for="nomor_telepon	" class="form-label fw-bold">Nomor Telepon</label>
           <input type="text" class="form-control" name="nomor_telepon" maxlength="12" minlength="9" id="nomor_telepon" required placeholder="<%= result.nomor_telepon %>" />
         </div>
       </div>
       <!-- password -->
-      <div class="col-6">
+      <div class="col-sm-12 col-md-6">
         <div class="mb-3">
           <label for="password" class="form-label fw-bold">Password User</label>
           <input type="password" class="form-control" name="password" id="password" required placeholder="Masukkan password" />
         </div>
       </div>
       <!-- confirmPassword -->
-      <div class="col-6">
+      <div class="col-sm-12 col-md-6">
         <div class="mb-3">
           <label for="confirm" class="form-label fw-bold">Konfirmasi Password</label>
           <input type="password" class="form-control" name="confirm" id="confirm" required placeholder="Konfirmasi Password" />
         </div>
       </div>
       <!-- jenis_kelamin -->
-      <div class="row">
-        <div class="col-6">
-          <div class="row">
-            <div class="col-6">
-              <label for="jenis_kelamin" class="fw-bold mb-2">Jenis Kelamin</label>
+      <div class="col-sm-12 col-md-6">
+        <label for="jenis_kelamin" class="fw-bold mb-2">Jenis Kelamin</label>
+      </div>
+      <div class="col-sm-12 col-md-6 mb-3">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="jenis_kelamin" value="laki-laki" />
+              <label class="form-check-label" for="jenis_kelamin"> Laki-laki </label>
             </div>
           </div>
-        </div>
-        <div class="col-12 mb-3">
-          <div class="row">
-            <div class="col-6">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="jenis_kelamin" value="laki-laki" />
-                <label class="form-check-label" for="jenis_kelamin"> Laki-laki </label>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="jenis_kelamin" value="perempuan" />
-                <label class="form-check-label" for="jenis_kelamin"> Perempuan </label>
-              </div>
+          <div class="col-6">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="jenis_kelamin" value="perempuan" />
+              <label class="form-check-label" for="jenis_kelamin"> Perempuan </label>
             </div>
           </div>
         </div>

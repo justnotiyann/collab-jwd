@@ -1,29 +1,29 @@
 <div class="container section-margin p-5">
   <div class="row mb-5">
-    <div class="col-6">
-      <h3>Halaman Tambah Transaksi</h3>
-      <p>Perhatikan saat input data, Pastikan masukkan data dengan benar</p>
+    <div class="col-sm-12 col-lg-6">
+      <h3 class="fw-bold text-success">Halaman Tambah Transaksi</h3>
+      <p class="text-muted">Perhatikan saat input data, Pastikan masukkan data dengan benar</p>
     </div>
   </div>
   <form action="/transaksi/add" method="post">
     <input type="hidden" clss="form-control" name="id" value="" id="id" required placeholder="Masukkan ID" />
     <div class="row">
       <!-- Nama -->
-      <div class="col-4">
+      <div class="col-sm-12 col-md-6">
         <div class="mb-3">
           <label for="nama" class="form-label fw-bold">Nama User</label>
           <input type="text" class="form-control" name="nama" id="nama" required placeholder="Masukkan nama" />
         </div>
       </div>
       <!-- Email -->
-      <div class="col-4">
+      <div class="col-sm-12 col-md-6">
         <div class="mb-3">
           <label for="email" class="form-label fw-bold">Email user</label>
           <input type="email" class="form-control" name="email" id="email" required placeholder="Masukkan email" />
         </div>
       </div>
       <!-- nomor_telepon -->
-      <div class="col-4">
+      <div class="col-sm-12">
         <div class="mb-3">
           <label for="nomor_telepon	" class="form-label fw-bold">Nomor Telepon</label>
           <input type="tel" maxlength="12" minlength="9" class="form-control" name="nomor_telepon" id="nomor_telepon" required placeholder="Masukkan nomor telepon user" />
@@ -37,23 +37,23 @@
         </div>
       </div>
       <!-- judul_buku-->
-      <div class="col-4">
+      <div class="col-sm-12 col-md-4">
         <div class="mb-3">
           <label for="judul_buku" class="form-label fw-bold">Judul Buku</label>
           <input type="text" class="form-control" name="judul_buku" id="judul_buku" required placeholder="Masukkan judul buku" />
         </div>
       </div>
       <!-- harga -->
-      <div class="col-4">
+      <div class="col-sm-12 col-md-4">
         <div class="mb-3">
-          <label for="harga	" class="form-label fw-bold">Haga Buku</label>
+          <label for="harga	" class="form-label fw-bold">Harga Buku</label>
           <input type="text" class="form-control" name="harga" id="harga" required placeholder="Masukkan harga buku" />
         </div>
       </div>
       <!-- sistem_pembayaran -->
-      <div class="col-4">
+      <div class="col-sm-12 col-md-4">
         <div class="mb-3">
-          <label for="sistem_pembayaran" class="form-label fw-bold">Masukkan sistem_pembayaran</label>
+          <label for="sistem_pembayaran" class="form-label fw-bold">Sistem Pembayaran</label>
           <select class="form-control" name="sistem_pembayaran" id="sistem_pembayaran">
             <option value="Dana">Dana</option>
             <option value="Ovo">Ovo</option>

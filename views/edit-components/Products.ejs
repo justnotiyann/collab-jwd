@@ -1,34 +1,36 @@
 <div class="container p-5 section-margin">
   <div class="row mb-5">
-    <div class="col-6">
-      <h4>Halaman Edit Products</h4>
-      <p class="text-muted">Harap pastikan input product dengan benar</p>
+    <div class="col-sm-12 col-lg-6">
+      <a href="/products" style="text-decoration: none">
+        <h3 class="fw-bold text-success">Halaman Edit Product</h3>
+      </a>
+      <p class="text-muted">Perhatikan saat edit data,Harap masukkan data dengan benar</p>
     </div>
   </div>
   <form action="/products/edit" method="post">
     <div class="row">
-      <div class="col-6">
+      <div class="col-sm-12 col-md-6">
         <input required type="hidden" class="form-control" name="id" value="<%= result.id %>" id="id" placeholder="Masukkan ID Buku" />
         <div class="mb-3">
           <label for="judul_buku" class="form-label fw-bold">Judul Buku</label>
           <input required type="text" class="form-control" name="judul_buku" id="judul_buku" placeholder="<%= result.judul_buku %>" />
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-sm-12 col-md-6">
         <div class="mb-3">
           <label for="penulis" class="form-label fw-bold">Penulis Buku</label>
           <input required type="text" class="form-control" name="penulis" id="penulis" placeholder="<%= result.penulis %>" />
         </div>
       </div>
 
-      <div class="col">
+      <div class="col-sm-12 col-md-4">
         <div class="mb-3">
           <label for="penerbit" class="form-label fw-bold">Penerbit Buku</label>
           <input required type="text" class="form-control" name="penerbit" id="penerbit" placeholder="<%= result.penerbit %>" />
         </div>
       </div>
 
-      <div class="col">
+      <div class="col-sm-12 col-md-4">
         <div class="mb-3">
           <label for="kategori" class="form-label fw-bold">Masukkan Kategori</label>
           <select class="form-control" name="kategori" id="kategori">
@@ -41,13 +43,14 @@
         </div>
       </div>
 
-      <div class="col">
+      <div class="col-sm-12 col-md-4">
         <div class="mb-3">
           <label for="harga" class="form-label fw-bold">Harga Buku</label>
           <input required type="text" class="form-control" name="harga" id="harga" placeholder="<%= result.harga %>" />
         </div>
       </div>
     </div>
+    <input type="reset" value="Reset Data" class="btn btn-danger" />
     <button class="btn btn-success" id="buttonUpdate">Update Data</button>
   </form>
 </div>

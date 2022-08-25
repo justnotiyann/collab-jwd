@@ -75,7 +75,7 @@ router.post("/edit", verifyUser, async (req, res) => {
   if (!result) {
     confirmUI("Gagal edit data", "Gagal edit data", "transaksi", res);
   } else {
-    confirmUI("Gagal edit data", "Gagal edit data", "transaksi", res);
+    confirmUI("Berhasil edit data", "Berhasil edit data", "transaksi", res);
   }
 });
 

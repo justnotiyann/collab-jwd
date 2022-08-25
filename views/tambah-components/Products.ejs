@@ -1,29 +1,30 @@
 <div class="container section-margin p-5">
   <div class="row mb-5">
-    <div class="col-6">
-      <h3>Halaman Tambah Products</h3>
-      <p>Perhatikan saat input data, Pastikan masukkan data dengan benar</p>
+    <div class="col-sm-12 col-lg-6">
+      <h3 class="fw-bold text-success">Halaman Tambah Products</h3>
+      <p class="text-muted">Perhatikan saat input data, Pastikan masukkan data dengan benar</p>
     </div>
+    <div class="col-lg-6"></div>
   </div>
   <form action="/products/add" method="post">
     <input type="hidden" clss="form-control" name="id" value="" id="id" required placeholder="Masukkan ID" />
     <div class="row">
       <!-- Judul buku -->
-      <div class="col-6">
+      <div class="col-sm-12 col-md-6">
         <div class="mb-3">
           <label for="judul_buku" class="form-label fw-bold">Masukkan Judul Buku</label>
           <input type="text" class="form-control" name="judul_buku" id="judul_buku" required placeholder="Masukkan nama" />
         </div>
       </div>
       <!-- penulis -->
-      <div class="col-6">
+      <div class="col-sm-12 col-md-6">
         <div class="mb-3">
           <label for="penulis" class="form-label fw-bold">Penulis Buku</label>
           <input type="text" class="form-control" name="penulis" id="penulis" required placeholder="Masukkan penulis" />
         </div>
       </div>
       <!-- kategori buku -->
-      <div class="col-6">
+      <div class="col-sm-12 col-md-6">
         <div class="mb-3">
           <label for="kategori" class="form-label fw-bold">Masukkan Kategori</label>
           <select class="form-control" name="kategori" id="kategori">
@@ -36,7 +37,7 @@
         </div>
       </div>
       <!-- alamat -->
-      <div class="col-6">
+      <div class="col-sm-12 col-md-6">
         <div class="mb-3">
           <label for="penerbit" class="form-label fw-bold">Penerbit buku</label>
           <input type="text" class="form-control" name="penerbit" id="penerbit" required placeholder="Masukkan penerbit" />
