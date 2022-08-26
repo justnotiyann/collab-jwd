@@ -82,7 +82,7 @@ router.post("/edit", verifyUser, async (req, res) => {
 // Handling DELETE data
 router.get("/delete/:id", verifyUser, async (req, res) => {
   const id = req.params.id;
-  const result = await Transaksi.destroy({ where: { nama: id } });
+  const result = await Transaksi.destroy({ where: { id: id } });
   if (!result) {
     confirmUI("Gagal hapus data", "Gagal hapus data", "transaksi", res);
   } else {

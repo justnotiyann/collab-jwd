@@ -60,11 +60,11 @@ router.post("/add", verifyUser, async (req, res) => {
 // DELETE Handling for USERS table
 router.get("/delete/:id", verifyUser, async (req, res) => {
   const id = req.params.id;
-  const result = await Users.destroy({ where: { nama: id } });
+  const result = await Users.destroy({ where: { id: id } });
   if (result.length < 0) {
     res.json({ msg: "Data tidak ditemukan" });
   } else {
-    confirmUI("Berhasil menghapus data", `Data user ${id} berhasil dihapus`, "users", res);
+    confirmUI("Berhasil menghapus data", `Data user berhasil dihapus`, "users", res);
   }
 });
 
