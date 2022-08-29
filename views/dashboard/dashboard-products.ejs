@@ -32,7 +32,7 @@
               <td><%= datas.penulis %></td>
               <td><%= datas.kategori %></td>
               <td><%= datas.penerbit %></td>
-              <td><%= datas.harga %></td>
+              <td><%= Math.abs(datas.harga) %></td>
               <td>
                 <a href="/products/delete/<%= datas.id %> " onclick="return confirm('Anda yakin?')">
                   <button class="btn btn-danger badge">Hapus Data</button>
