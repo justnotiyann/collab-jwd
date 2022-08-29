@@ -30,10 +30,10 @@
             <tr>
               <td><%= i++ %></td>
               <td><%= datas.email %></td>
-              <td><%= datas.nomor_telepon%></td>
+              <td><%= Math.abs(datas.nomor_telepon) %></td>
               <td><%= datas.alamat %></td>
               <td><%= datas.judul_buku %></td>
-              <td><%= datas.harga %></td>
+              <td><%= Math.abs(datas.harga) %></td>
               <td><%= datas.sistem_pembayaran %></td>
               <td>
                 <a href="/transaksi/delete/<%= datas.id %> " onclick="return confirm('Anda yakin?')">

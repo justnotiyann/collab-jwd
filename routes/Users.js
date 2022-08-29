@@ -86,34 +86,52 @@ router.get("/edit/:id", async (req, res) => {
 // Handling form EDIT Users
 router.post("/edit", verifyUser, async (req, res) => {
   const { id, nama, email, nomor_telepon, password, jenis_kelamin, confirm, alamat } = req.body;
-  const getEmailName = await Users.findOne({ where: { [Op.or]: [{ nama: nama }, { email: email }] } });
-  if (getEmailName) {
-    confirmUI("Gagal edit data", "Nama / Email sudah digunakan harap inputkan kembali.", "users", res);
-  } else {
-    if (password != confirm) {
-      confirmUI("Gagal edit data", "Password tidak sama harap inputkan kembali.", "users", res);
-    } else {
-      const hash = await argon2.hash(password);
-      const result = await Users.update(
-        {
-          nama: nama,
-          email: email,
-          nomor_telepon: nomor_telepon,
-          password: hash,
-          jenis_kelamin: jenis_kelamin,
-          alamat: alamat,
-        },
-        {
-          where: { id: id },
-        }
-      );
-      if (!result) {
-        res.json({ msg: "Terjadi kesalahan" });
-      } else {
-        confirmUI("Berhasil edit user", "Berhasil edit user", "users", res);
-      }
-    }
-  }
+  if(password != confirm) confirmUI('Gagal edit data','Password tidak cocok harap cek kembali','users',res)
+  const hash = await argon2.hash(password)
+  const result = await Users.update({
+            nama: nama,
+            email: email,
+            nomor_telepon: nomor_telepon,
+            password: hash,
+            jenis_kelamin: jenis_kelamin,
+            alamat: alamat,
+  },
+  {
+    where:{id:id}
+  })
+  if(!result) confirmUI("Terjadi Kesalahan",'Server Erorr','users',res)
+  confirmUI("Berhasil edit user", "Berhasil edit user", "users", res);
+  // if(password != confirm){
+  //   confirmUI("Gagal edit data", "Password tidak sama harap cek kembali.", "users", res);
+  // }else{}
+  // const getEmailName = await Users.findOne({ where: { [Op.or]: [{ nama: nama }, { email: email }] } });
+  // if (getEmailName) {
+  //   confirmUI("Gagal edit data", "Nama / Email sudah digunakan harap inputkan kembali.", "users", res);
+  // } else {
+  //   if (password != confirm) {
+  //     confirmUI("Gagal edit data", "Password tidak sama harap inputkan kembali.", "users", res);
+  //   } else {
+  //     const hash = await argon2.hash(password);
+  //     const result = await Users.update(
+  //       {
+  //         nama: nama,
+  //         email: email,
+  //         nomor_telepon: nomor_telepon,
+  //         password: hash,
+  //         jenis_kelamin: jenis_kelamin,
+  //         alamat: alamat,
+  //       },
+  //       {
+  //         where: { id: id },
+  //       }
+  //     );
+  //     if (!result) {
+  //       res.json({ msg: "Terjadi kesalahan" });
+  //     } else {
+  //       confirmUI("Berhasil edit user", "Berhasil edit user", "users", res);
+  //     }
+  //   }
+  // }
 });
 
 // Handling fitur SEARCH
