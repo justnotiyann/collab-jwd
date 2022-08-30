@@ -20,7 +20,9 @@ Untuk proses pengerjaan website ini kami lakukan dengan tempo waktu 2 minggu, ja
 
 
 **link github project collaborasi** : https://github.com/justnotiyann/collab-jwd.git
+
 **Link hosting via Heroku.app** : https://nodejs-tokobuku.herokuapp.com/
+
 **Teknologi yang digunakan** :
 
 - Frontend    : HTML CSS Framework Bootstrap
