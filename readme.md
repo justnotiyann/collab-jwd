@@ -41,5 +41,3 @@ Untuk proses pengerjaan website ini kami lakukan dengan tempo waktu 2 minggu, ja
     - Rizki Ramdani
     - Aldi Fauzan
     - Angga Saputra
-
-Semua anggota diatas merupakan Mahasiswa Aktif STMIK IKMI Cirebon angkatan 2021
