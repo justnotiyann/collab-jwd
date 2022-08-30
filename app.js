@@ -65,6 +65,7 @@ const loginRouter = require("./routes/Login");
 const productsRouter = require("./routes/Products");
 const usersRouter = require("./routes/Users");
 const transaksiRouter = require("./routes/Transaksi");
+const adminRouter = require('./routes/admin')
 
 app.use("/", indexRouter);
 app.use("/login", loginRouter);
@@ -74,5 +75,7 @@ app.use("/daftar", daftarRouter);
 app.use("/products", productsRouter);
 app.use("/users", usersRouter);
 app.use("/transaksi", transaksiRouter);
+app.use('/admin',adminRouter)
+
 
 module.exports = app;
