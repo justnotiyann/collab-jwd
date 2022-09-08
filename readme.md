@@ -21,7 +21,7 @@ Untuk proses pengerjaan website ini kami lakukan dengan tempo waktu 2 minggu, ja
 
 **link github project collaborasi** : https://github.com/justnotiyann/collab-jwd.git
 
-**Link hosting via Heroku.app** : https://nodejs-tokobuku.herokuapp.com/
+**Link hosting via Heroku.app** : http://iyanxdev.my.id:3000
 
 **Teknologi yang digunakan** :
 
